@@ -1,36 +1,167 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Website - David Meyer
+
+This is a modern, responsive portfolio website built with Next.js 15, TypeScript, and Tailwind CSS.
+
+## Features
+
+✨ **Complete Portfolio Solution**
+- Home page with hero section and featured projects
+- About page with personal information and hobbies
+- Experience page with timeline, skills, and education
+- Projects page with featured and other projects
+- Contact page with form and contact information
+- Legal pages (Impressum & Datenschutz)
+
+🎨 **Modern Design**
+- Clean and professional design
+- Responsive layout for all devices
+- Dark mode support (auto-detects system preference)
+- Smooth animations and transitions
+- Custom scrollbar styling
+
+🛠 **Technical Highlights**
+- Built with Next.js 15 (App Router)
+- TypeScript for type safety
+- Tailwind CSS 4 for styling
+- SEO optimized with metadata
+- Static site generation for optimal performance
+- Easy content management via data file
 
 ## Getting Started
 
-First, run the development server:
+### Installation
+
+```bash
+npm install
+```
+
+### Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+### Start Production Server
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Content Management
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+All content can be easily edited by modifying the `/lib/data.ts` file. This includes:
 
-## Deploy on Vercel
+- Personal information (name, title, bio, email, location)
+- Social media links
+- About section and hobbies
+- Skills categories
+- Experience and education
+- Projects
+- Footer links
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Simply edit the data in this file to update your portfolio content - no code changes needed!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+```
+portfolio/
+├── app/                    # Next.js app directory
+│   ├── about/             # About page
+│   ├── contact/           # Contact page
+│   ├── datenschutz/       # Privacy policy page
+│   ├── experience/        # Experience page
+│   ├── impressum/         # Legal notice page
+│   ├── projects/          # Projects page
+│   ├── layout.tsx         # Root layout with navigation
+│   ├── page.tsx           # Home page
+│   └── globals.css        # Global styles
+├── components/            # Reusable components
+│   ├── Navigation.tsx     # Navigation bar
+│   └── Footer.tsx         # Footer component
+├── lib/                   # Library files
+│   └── data.ts            # Content data file
+└── public/                # Static assets
+
+```
+
+## Customization
+
+### Update Personal Information
+
+Edit `/lib/data.ts` and update the `personalInfo` object:
+
+```typescript
+export const personalInfo = {
+  name: "Your Name",
+  title: "Your Title",
+  email: "your.email@example.com",
+  location: "Your Location",
+  bio: "Your bio...",
+};
+```
+
+### Add New Projects
+
+Add new projects to the `projects` array in `/lib/data.ts`:
+
+```typescript
+{
+  title: "Project Name",
+  description: "Project description",
+  tags: ["Tag1", "Tag2"],
+  github: "https://github.com/...",
+  demo: "https://...",
+  featured: true, // or false
+}
+```
+
+### Update Colors
+
+Modify the color scheme in `app/globals.css` by changing the CSS variables:
+
+```css
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+```
+
+## Deployment
+
+### Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new).
+
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+### Other Platforms
+
+This project can be deployed to any platform that supports Next.js:
+- Netlify
+- AWS Amplify
+- Cloudflare Pages
+- Railway
+- And many more...
+
+## Technologies Used
+
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type-safe JavaScript
+- **Tailwind CSS 4** - Utility-first CSS framework
+- **React 19** - UI library
+
+## License
+
+© 2024 David Meyer. All rights reserved.
+
+## Support
+
+For questions or issues, please open an issue on GitHub or contact me at contact@davidmeyer.dev.
