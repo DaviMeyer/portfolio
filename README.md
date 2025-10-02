@@ -1,4 +1,4 @@
-# Portfolio Website - David Meyer
+# Portfolio Website - Davi Meyer
 
 This is a modern, responsive portfolio website built with Next.js 15, TypeScript, and Tailwind CSS.
 
@@ -160,8 +160,8 @@ This project can be deployed to any platform that supports Next.js:
 
 ## License
 
-© 2024 David Meyer. All rights reserved.
+© 2024 Davi Meyer. All rights reserved.
 
 ## Support
 
-For questions or issues, please open an issue on GitHub or contact me at contact@davidmeyer.dev.
+For questions or issues, please open an issue on GitHub or contact me at contact@davimeyer.dev.

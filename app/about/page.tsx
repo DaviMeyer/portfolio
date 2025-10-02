@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import { about, personalInfo } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Über mich - David Meyer Portfolio",
-  description: "Erfahren Sie mehr über David Meyer - Interessen, Hobbys und Hintergrund",
+  title: "Über mich - Davi Meyer Portfolio",
+  description: "Erfahren Sie mehr über Davi Meyer - Interessen, Hobbys und Hintergrund",
 };
 
 export default function AboutPage() {

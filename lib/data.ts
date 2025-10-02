@@ -2,9 +2,9 @@
 // Edit this file to update the content of your portfolio website
 
 export const personalInfo = {
-  name: "David Meyer",
+  name: "Davi Meyer",
   title: "Full Stack Developer",
-  email: "contact@davidmeyer.dev",
+  email: "contact@davimeyer.dev",
   location: "Deutschland",
   bio: "Leidenschaftlicher Entwickler mit Fokus auf moderne Web-Technologien und benutzerfreundliche Lösungen.",
   profileImage: "/profile.jpg", // Add your profile image to /public folder
@@ -18,18 +18,18 @@ export const socialLinks = [
   },
   {
     name: "LinkedIn",
-    url: "https://linkedin.com/in/davidmeyer",
+    url: "https://linkedin.com/in/davimeyer",
     icon: "linkedin",
   },
   {
     name: "Twitter",
-    url: "https://twitter.com/davidmeyer",
+    url: "https://twitter.com/davimeyer",
     icon: "twitter",
   },
 ];
 
 export const about = {
-  description: `Hallo! Ich bin David Meyer, ein leidenschaftlicher Full Stack Developer aus Deutschland. 
+  description: `Hallo! Ich bin Davi Meyer, ein leidenschaftlicher Full Stack Developer aus Deutschland. 
   
   Ich liebe es, elegante Lösungen für komplexe Probleme zu entwickeln und dabei moderne Technologien einzusetzen. Mein Fokus liegt auf der Entwicklung von performanten, benutzerfreundlichen Web-Anwendungen, die echten Mehrwert bieten.
   
@@ -183,19 +183,19 @@ export const testimonials = [
   {
     name: "Max Müller",
     position: "CEO, Tech Company GmbH",
-    content: "David ist ein hervorragender Entwickler mit ausgezeichneten Problemlösungsfähigkeiten. Seine Arbeit ist immer von höchster Qualität.",
+    content: "Davi ist ein hervorragender Entwickler mit ausgezeichneten Problemlösungsfähigkeiten. Seine Arbeit ist immer von höchster Qualität.",
     avatar: "/testimonials/avatar1.jpg",
   },
   {
     name: "Sarah Schmidt",
     position: "Projekt Manager, Digital Agency",
-    content: "Die Zusammenarbeit mit David war großartig. Er liefert stets pünktlich und übertrifft die Erwartungen.",
+    content: "Die Zusammenarbeit mit Davi war großartig. Er liefert stets pünktlich und übertrifft die Erwartungen.",
     avatar: "/testimonials/avatar2.jpg",
   },
 ];
 
 export const footer = {
-  copyright: `© ${new Date().getFullYear()} David Meyer. Alle Rechte vorbehalten.`,
+  copyright: `© ${new Date().getFullYear()} Davi Meyer. Alle Rechte vorbehalten.`,
   links: [
     { name: "Impressum", href: "/impressum" },
     { name: "Datenschutz", href: "/datenschutz" },

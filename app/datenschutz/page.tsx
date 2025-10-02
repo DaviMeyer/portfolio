@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Datenschutz - David Meyer Portfolio",
+  title: "Datenschutz - Davi Meyer Portfolio",
   description: "Datenschutzerklärung",
 };
 

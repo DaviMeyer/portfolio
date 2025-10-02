@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { projects } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Projekte - David Meyer Portfolio",
+  title: "Projekte - Davi Meyer Portfolio",
   description: "Entdecken Sie meine Projekte und bisherige Arbeiten",
 };
 

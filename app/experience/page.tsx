@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import { experience, education, skills } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Erfahrung - David Meyer Portfolio",
-  description: "Beruflicher Werdegang, Skills und Ausbildung von David Meyer",
+  title: "Erfahrung - Davi Meyer Portfolio",
+  description: "Beruflicher Werdegang, Skills und Ausbildung von Davi Meyer",
 };
 
 export default function ExperiencePage() {

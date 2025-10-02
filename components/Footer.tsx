@@ -9,7 +9,7 @@ export default function Footer() {
           {/* About Section */}
           <div>
             <h3 className="text-lg font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              David Meyer
+              Davi Meyer
             </h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm">
               Full Stack Developer mit Leidenschaft für moderne Web-Technologien

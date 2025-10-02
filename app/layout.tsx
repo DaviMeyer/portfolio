@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "David Meyer - Portfolio",
+  title: "Davi Meyer - Portfolio",
   description: "Portfolio website showcasing my work, experience, and projects",
   keywords: ["portfolio", "developer", "projects", "experience"],
 };
