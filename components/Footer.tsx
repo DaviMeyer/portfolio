@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { footer, socialLinks } from "@/lib/data";
 
 export default function Footer() {
@@ -73,7 +74,13 @@ export default function Footer() {
                   className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   aria-label={link.name}
                 >
-                  <span className="text-2xl">{getSocialIcon(link.icon)}</span>
+                  <Image
+                    src="/github.svg"
+                    alt="GitHub"
+                    width={28}
+                    height={28}
+                    className="dark:invert"
+                  />
                 </a>
               ))}
             </div>
@@ -102,14 +109,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
-
-// Helper function to get social icons
-function getSocialIcon(icon: string) {
-  const icons: { [key: string]: string } = {
-    github: "⚡",
-    linkedin: "💼",
-    twitter: "🐦",
-  };
-  return icons[icon] || "🔗";
 }

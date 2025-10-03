@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { personalInfo, socialLinks, projects } from "@/lib/data";
 
 export default function Home() {
@@ -48,10 +49,16 @@ export default function Home() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-3xl text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="w-12 h-12 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                     aria-label={link.name}
                   >
-                    {getSocialIcon(link.icon)}
+                    <Image
+                      src="/github.svg"
+                      alt="GitHub"
+                      width={32}
+                      height={32}
+                      className="dark:invert"
+                    />
                   </a>
                 ))}
               </div>
@@ -143,14 +150,4 @@ export default function Home() {
       </section>
     </div>
   );
-}
-
-// Helper function for social icons
-function getSocialIcon(icon: string) {
-  const icons: { [key: string]: string } = {
-    github: "⚡",
-    linkedin: "💼",
-    twitter: "🐦",
-  };
-  return icons[icon] || "🔗";
 }
