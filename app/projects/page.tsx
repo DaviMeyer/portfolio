@@ -39,11 +39,11 @@ export default function ProjectsPage() {
           </div>
 
           <div className="flex justify-center">
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl">
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl justify-items-center w-full">
               {featuredProjects.map((project, index) => (
               <div
                 key={index}
-                className="bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                className="bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 w-full max-w-md"
               >
                 <div className="h-64 bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center text-white text-8xl">
                   {getProjectIcon(index)}
@@ -104,11 +104,11 @@ export default function ProjectsPage() {
           </div>
 
           <div className="flex justify-center">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl justify-items-center w-full">
               {otherProjects.map((project, index) => (
               <div
                 key={index}
-                className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 w-full max-w-sm"
               >
                 <div className="h-48 bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center text-white text-6xl">
                   {getProjectIcon(index + featuredProjects.length)}
