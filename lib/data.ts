@@ -16,16 +16,6 @@ export const socialLinks = [
     url: "https://github.com/DaviMeyer",
     icon: "github",
   },
-  {
-    name: "LinkedIn",
-    url: "https://linkedin.com/in/davimeyer",
-    icon: "linkedin",
-  },
-  {
-    name: "Twitter",
-    url: "https://twitter.com/davimeyer",
-    icon: "twitter",
-  },
 ];
 
 export const about = {
@@ -124,57 +114,12 @@ export const education = [
 
 export const projects = [
   {
-    title: "E-Commerce Platform",
-    description: "Eine moderne E-Commerce-Plattform mit Next.js, TypeScript und Stripe-Integration für nahtlose Zahlungsabwicklung.",
-    image: "/projects/ecommerce.jpg",
-    tags: ["Next.js", "TypeScript", "Stripe", "Tailwind CSS"],
-    github: "https://github.com/DaviMeyer/ecommerce-platform",
-    demo: "https://ecommerce-demo.vercel.app",
-    featured: true,
-  },
-  {
-    title: "Task Management App",
-    description: "Kollaborative Task-Management-Anwendung mit Real-time Updates und Team-Funktionen.",
-    image: "/projects/taskmanager.jpg",
-    tags: ["React", "Node.js", "Socket.io", "MongoDB"],
-    github: "https://github.com/DaviMeyer/task-manager",
-    demo: "https://taskmanager-demo.vercel.app",
-    featured: true,
-  },
-  {
-    title: "Weather Dashboard",
-    description: "Interaktives Wetter-Dashboard mit Daten-Visualisierung und Wettervorhersagen.",
-    image: "/projects/weather.jpg",
-    tags: ["React", "API Integration", "Chart.js"],
-    github: "https://github.com/DaviMeyer/weather-dashboard",
-    demo: "https://weather-demo.vercel.app",
-    featured: false,
-  },
-  {
-    title: "Portfolio Generator",
-    description: "Tool zur automatischen Generierung von Portfolio-Websites mit verschiedenen Templates.",
-    image: "/projects/portfolio-gen.jpg",
-    tags: ["Next.js", "Markdown", "Static Site"],
-    github: "https://github.com/DaviMeyer/portfolio-generator",
-    demo: "https://portfolio-gen-demo.vercel.app",
-    featured: false,
-  },
-  {
-    title: "Blog CMS",
-    description: "Headless CMS für Blogs mit Markdown-Support und SEO-Optimierung.",
-    image: "/projects/blog-cms.jpg",
-    tags: ["Next.js", "MDX", "Prisma", "PostgreSQL"],
-    github: "https://github.com/DaviMeyer/blog-cms",
-    demo: "https://blog-cms-demo.vercel.app",
-    featured: false,
-  },
-  {
-    title: "AI Chat Assistant",
-    description: "KI-gestützter Chat-Assistent mit Natural Language Processing.",
-    image: "/projects/ai-chat.jpg",
-    tags: ["Python", "OpenAI", "React", "FastAPI"],
-    github: "https://github.com/DaviMeyer/ai-chat-assistant",
-    demo: "https://ai-chat-demo.vercel.app",
+    title: "Departure",
+    description: "A modern travel planning application built with cutting-edge technologies.",
+    image: "/projects/departure.jpg",
+    tags: ["Next.js", "TypeScript", "React", "Tailwind CSS"],
+    github: "https://github.com/DaviMeyer/departure",
+    demo: "https://departure-demo.vercel.app",
     featured: true,
   },
 ];

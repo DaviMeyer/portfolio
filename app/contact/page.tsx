@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { personalInfo, socialLinks } from "@/lib/data";
 
 export default function ContactPage() {
@@ -123,10 +124,16 @@ export default function ContactPage() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-2xl hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
+                      className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
                       aria-label={link.name}
                     >
-                      {getSocialIcon(link.icon)}
+                      <Image
+                        src="/github.svg"
+                        alt="GitHub"
+                        width={24}
+                        height={24}
+                        className="dark:invert"
+                      />
                     </a>
                   ))}
                 </div>
@@ -267,14 +274,4 @@ export default function ContactPage() {
       </section>
     </div>
   );
-}
-
-// Helper function for social icons
-function getSocialIcon(icon: string) {
-  const icons: { [key: string]: string } = {
-    github: "⚡",
-    linkedin: "💼",
-    twitter: "🐦",
-  };
-  return icons[icon] || "🔗";
 }
