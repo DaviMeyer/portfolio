@@ -38,8 +38,9 @@ export default function ProjectsPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {featuredProjects.map((project, index) => (
+          <div className="flex justify-center">
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl">
+              {featuredProjects.map((project, index) => (
               <div
                 key={index}
                 className="bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
@@ -85,6 +86,7 @@ export default function ProjectsPage() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>
@@ -101,8 +103,9 @@ export default function ProjectsPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {otherProjects.map((project, index) => (
+          <div className="flex justify-center">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl">
+              {otherProjects.map((project, index) => (
               <div
                 key={index}
                 className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
@@ -153,6 +156,7 @@ export default function ProjectsPage() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>

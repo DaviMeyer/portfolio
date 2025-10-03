@@ -23,7 +23,7 @@ export default function ImpressumPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Angaben gemäss § 5 TMG
+              Angaben gemäss schweizerischem Obligationenrecht
             </h2>
 
             <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mb-8">
@@ -60,9 +60,10 @@ export default function ImpressumPage() {
             <p className="text-gray-600 dark:text-gray-400 mb-4">
               Die Inhalte unserer Seiten wurden mit grösster Sorgfalt erstellt.
               Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte
-              können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter
-              sind wir gemäss § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten
-              nach den allgemeinen Gesetzen verantwortlich.
+              können wir jedoch keine Gewähr übernehmen. Gemäss den 
+              gesetzlichen Bestimmungen sind wir für eigene Inhalte auf 
+              diesen Seiten nach den allgemeinen schweizerischen Gesetzen 
+              verantwortlich.
             </p>
 
             <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
@@ -81,7 +82,7 @@ export default function ImpressumPage() {
             </h4>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
               Die durch die Seitenbetreiber erstellten Inhalte und Werke auf
-              diesen Seiten unterliegen dem deutschen Urheberrecht. Die
+              diesen Seiten unterliegen dem schweizerischen Urheberrecht. Die
               Vervielfältigung, Bearbeitung, Verbreitung und jede Art der
               Verwertung ausserhalb der Grenzen des Urheberrechtes bedürfen der
               schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.

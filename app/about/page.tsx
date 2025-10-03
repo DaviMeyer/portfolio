@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { about, personalInfo } from "@/lib/data";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Über mich - Davi Meyer Portfolio",
@@ -50,25 +51,32 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {about.hobbies.map((hobby, index) => (
-              <div
-                key={index}
-                className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="h-48 bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center text-white text-6xl">
-                  {getHobbyIcon(hobby.title)}
+          <div className="flex justify-center">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl">
+              {about.hobbies.map((hobby, index) => (
+                <div
+                  key={index}
+                  className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                >
+                  <div className="h-48 relative">
+                    <Image
+                      src={hobby.image || "/hobbies/wandern.jpg"}
+                      alt={hobby.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                      {hobby.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
+                      {hobby.description}
+                    </p>
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                    {hobby.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    {hobby.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -115,15 +123,4 @@ export default function AboutPage() {
       </section>
     </div>
   );
-}
-
-// Helper function to get hobby icons
-function getHobbyIcon(title: string): string {
-  const icons: { [key: string]: string } = {
-    Programmieren: "💻",
-    Fotografie: "📷",
-    Wandern: "🥾",
-    Gaming: "🎮",
-  };
-  return icons[title] || "🎨";
 }

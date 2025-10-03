@@ -32,7 +32,9 @@ export default function DatenschutzPage() {
               Die folgenden Hinweise geben einen einfachen Überblick darüber,
               was mit Ihren personenbezogenen Daten passiert, wenn Sie diese
               Website besuchen. Personenbezogene Daten sind alle Daten, mit
-              denen Sie persönlich identifiziert werden können.
+              denen Sie persönlich identifiziert werden können. Diese
+              Datenschutzerklärung richtet sich nach dem schweizerischen
+              Datenschutzgesetz (DSG).
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
@@ -89,7 +91,8 @@ export default function DatenschutzPage() {
               Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen
               Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten
               vertraulich und entsprechend der gesetzlichen
-              Datenschutzvorschriften sowie dieser Datenschutzerklärung.
+              Datenschutzvorschriften der Schweiz (DSG) sowie dieser 
+              Datenschutzerklärung.
             </p>
 
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
@@ -101,10 +104,10 @@ export default function DatenschutzPage() {
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              5. Ihre Rechte
+              5. Ihre Rechte nach DSG
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Sie haben folgende Rechte:
+              Sie haben gemäss schweizerischem Datenschutzgesetz folgende Rechte:
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 mb-6">
               <li>Recht auf Auskunft über Ihre gespeicherten Daten</li>
@@ -112,7 +115,8 @@ export default function DatenschutzPage() {
               <li>Recht auf Löschung Ihrer Daten</li>
               <li>Recht auf Einschränkung der Datenverarbeitung</li>
               <li>Recht auf Datenübertragbarkeit</li>
-              <li>Recht auf Widerspruch</li>
+              <li>Recht auf Widerspruch gegen die Datenverarbeitung</li>
+              <li>Recht auf Beschwerde beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB)</li>
             </ul>
 
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">

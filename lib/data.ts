@@ -28,7 +28,7 @@ export const about = {
     {
       title: "Sport",
       description: "Krafttraining im Fitnessstudio und Ausdauersport",
-      image: "/hobbies/photography.jpg",
+      image: "/hobbies/gym.jpg",
     },
     {
       title: "Wandern",
@@ -38,7 +38,7 @@ export const about = {
     {
       title: "Gaming",
       description: "Entspannen und mit Freunden spielen",
-      image: "/hobbies/gaming.jpg",
+      image: "/hobbies/wandern.jpg",
     },
   ],
 };
