@@ -40,6 +40,11 @@ export const about = {
       description: "Entspannen und mit Freunden spielen",
       image: "/hobbies/wandern.jpg",
     },
+    {
+      title: "Klavier",
+      description: "Musikalisch begeistert",
+      image: "/hobbies/wandern.jpg",
+    },
   ],
 };
 
