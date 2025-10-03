@@ -6,7 +6,7 @@ export const personalInfo = {
   title: "Full Stack Developer",
   email: "contact@davimeyer.dev",
   location: "Deutschland",
-  bio: "Leidenschaftlicher Entwickler mit Fokus auf moderne Web-Technologien und benutzerfreundliche Lösungen.",
+  bio: "Entwickler mit Fokus auf moderne Web-Technologien und benutzerfreundliche Lösungen.",
   profileImage: "/profile.jpg", // Add your profile image to /public folder
 };
 
@@ -19,26 +19,21 @@ export const socialLinks = [
 ];
 
 export const about = {
-  description: `Hallo! Ich bin Davi Meyer, ein leidenschaftlicher Full Stack Developer aus Deutschland. 
+  description: `Hallo! Ich bin Davi Meyer, ein Full Stack Developer aus der Schweiz. 
   
-  Ich liebe es, elegante Lösungen für komplexe Probleme zu entwickeln und dabei moderne Technologien einzusetzen. Mein Fokus liegt auf der Entwicklung von performanten, benutzerfreundlichen Web-Anwendungen, die echten Mehrwert bieten.
+  Ich liebe es, Lösungen für komplexe Probleme zu entwickeln und dabei moderne Technologien einzusetzen. Mein Fokus liegt auf der Entwicklung von performanten, benutzerfreundlichen Web-Anwendungen, die echten Mehrwert bieten.
   
-  Wenn ich nicht gerade code, verbringe ich meine Zeit gerne mit Fotografie, Wandern und dem Entdecken neuer Technologien. Ich bin immer offen für interessante Projekte und neue Herausforderungen.`,
+  Meine Freizeit verbringe ich gerne mit Fotografie, Wandern und dem Entdecken neuer Technologien. Ich bin immer offen für interessante Projekte und neue Herausforderungen.`,
   hobbies: [
     {
-      title: "Programmieren",
-      description: "Neue Technologien lernen und innovative Projekte entwickeln",
-      image: "/hobbies/coding.jpg",
-    },
-    {
-      title: "Fotografie",
-      description: "Die Welt durch die Linse entdecken",
+      title: "Sport",
+      description: "Krafttraining im Fitnessstudio und Ausdauersport",
       image: "/hobbies/photography.jpg",
     },
     {
       title: "Wandern",
-      description: "Natur genießen und neue Orte erkunden",
-      image: "/hobbies/hiking.jpg",
+      description: "Natur geniessen und neue Orte erkunden",
+      image: "/hobbies/wandern.jpg",
     },
     {
       title: "Gaming",
@@ -51,75 +46,73 @@ export const about = {
 export const skills = [
   {
     category: "Frontend",
-    items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "HTML/CSS"],
+    items: ["React", "Angular", "Next.js", "TypeScript", "Tailwind CSS", "HTML/CSS"],
   },
   {
     category: "Backend",
-    items: ["Node.js", "Express", "Python", "PostgreSQL", "MongoDB"],
+    items: ["Spring Boot", "Node.js", "Express", "MariaDB"],
   },
   {
     category: "Tools & Others",
     items: ["Git", "Docker", "AWS", "CI/CD", "Agile/Scrum"],
   },
 ];
-
 export const experience = [
   {
-    title: "Senior Full Stack Developer",
-    company: "Tech Company GmbH",
-    location: "Berlin, Deutschland",
-    period: "2022 - Heute",
-    description: "Entwicklung und Wartung von Webanwendungen mit React, Next.js und Node.js. Leitung eines Teams von 3 Entwicklern.",
+    title: "Basislehrjahr",
+    company: "BBC",
+    location: "Zürich, Schweiz",
+    period: "2022 - 2023",
+    description: "Grundausbildung im IT-Bereich. Einführung in Programmierung, Softwareentwicklung und IT-Grundlagen.",
     achievements: [
-      "Performance-Optimierung der Hauptanwendung um 40%",
-      "Implementierung eines neuen CI/CD Pipelines",
-      "Mentoring von Junior-Entwicklern",
+      "Erste praktische Erfahrungen in Web- und Softwareentwicklung",
+      "Teilnahme an internen Projekten zur Wissensvertiefung",
     ],
   },
   {
-    title: "Full Stack Developer",
-    company: "Digital Agency",
-    location: "München, Deutschland",
-    period: "2020 - 2022",
-    description: "Entwicklung von kundenspezifischen Web-Lösungen für verschiedene Branchen.",
+    title: "IT-Lab Developer",
+    company: "SIX Group",
+    location: "Zürich, Schweiz",
+    period: "2023 - 2025",
+    description: "Einsatz im IT-Lab zur Umsetzung kleinerer Projekte und Prototypen. Vertiefung von Backend- und Frontend-Technologien.",
     achievements: [
-      "Erfolgreiches Launch von 10+ Kundenprojekten",
-      "Entwicklung wiederverwendbarer Komponenten-Bibliothek",
-      "Integration von Third-Party APIs",
+      "Mitentwicklung von Admigo (Lehrlings Administrationstool)",
+      "Mitentwicklung von RAT (Internes Risk Assessment Tool)",
+      "Teamarbeit in agilen Projekten",
     ],
   },
   {
-    title: "Junior Developer",
-    company: "Startup XYZ",
-    location: "Hamburg, Deutschland",
-    period: "2018 - 2020",
-    description: "Erste professionelle Erfahrungen in der Webentwicklung mit modernen Frameworks.",
+    title: "Application engineering Team Intern / Lernender",
+    company: "SIX Group",
+    location: "Zürich, Schweiz",
+    period: "2025 - 2026 (voraussichtlich)",
+    description: "Weiterentwicklung eines internes Frameworks basierend aus Spring",
     achievements: [
-      "Mitarbeit an MVP-Entwicklung",
-      "Unit-Testing und Code-Reviews",
-      "Agile Teamarbeit",
+      "Arbeiten an produktiven Backend-Services",
+      "Mitwirkung bei Prozessoptimierungen",
+      "Erweiterung von Kenntnissen in modernen Technologien",
     ],
   },
 ];
 
 export const education = [
   {
-    degree: "Bachelor of Science in Informatik",
-    institution: "Technische Universität",
-    location: "Deutschland",
-    period: "2015 - 2018",
-    description: "Schwerpunkt: Software Engineering und Web-Technologien",
+    degree: "Sekundarschule Sek A",
+    institution: "Sekundarschule",
+    location: "Zürich",
+    period: "2019 - 2022",
+    description: "Abschluss der Sekundarschule Sek A, anschliessend Start der Lehre bei SIX.",
   },
 ];
 
 export const projects = [
   {
     title: "Departure",
-    description: "A modern travel planning application built with cutting-edge technologies.",
+    description: "A modern travel planner for checking real-time tram departures from the Six office locations in Zurich",
     image: "/projects/departure.jpg",
     tags: ["Next.js", "TypeScript", "React", "Tailwind CSS"],
     github: "https://github.com/DaviMeyer/departure",
-    demo: "https://departure-demo.vercel.app",
+    demo: "https://tram.davimeyer.dev",
     featured: true,
   },
 ];
@@ -134,7 +127,7 @@ export const testimonials = [
   {
     name: "Sarah Schmidt",
     position: "Projekt Manager, Digital Agency",
-    content: "Die Zusammenarbeit mit Davi war großartig. Er liefert stets pünktlich und übertrifft die Erwartungen.",
+    content: "Die Zusammenarbeit mit Davi war grossartig. Er liefert stets pünktlich und übertrifft die Erwartungen.",
     avatar: "/testimonials/avatar2.jpg",
   },
 ];

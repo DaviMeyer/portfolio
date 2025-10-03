@@ -13,8 +13,7 @@ export default function Footer() {
               Davi Meyer
             </h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm">
-              Full Stack Developer mit Leidenschaft für moderne Web-Technologien
-              und benutzerfreundliche Lösungen.
+              Full Stack Developer
             </p>
           </div>
 
