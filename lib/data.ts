@@ -5,7 +5,7 @@ export const personalInfo = {
   name: "Davi Meyer",
   title: "Full Stack Developer",
   email: "contact@davimeyer.dev",
-  location: "Deutschland",
+  location: "Schweiz",
   bio: "Entwickler mit Fokus auf moderne Web-Technologien und benutzerfreundliche Lösungen.",
   profileImage: "/profile.jpg", // Add your profile image to /public folder
 };
