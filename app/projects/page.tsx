@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { projects } from "@/lib/data";
+import ExpandableCard from "@/components/ExpandableCard";
 
 export const metadata: Metadata = {
   title: "Projekte - Davi Meyer Portfolio",
@@ -41,30 +42,19 @@ export default function ProjectsPage() {
           <div className="flex justify-center">
             <div className="grid md:grid-cols-1 gap-8 max-w-5xl justify-items-center w-full">
               {featuredProjects.map((project, index) => (
-              <div
+              <ExpandableCard
                 key={index}
-                className="bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 w-full max-w-md"
-              >
-                <div className="h-64 bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center text-white text-8xl">
-                  {getProjectIcon(index)}
-                </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tags.map((tag, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm rounded-full font-medium"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                title={project.title}
+                description={project.description}
+                imagePlaceholder={
+                  <div className="h-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center text-white text-8xl">
+                    {getProjectIcon(index)}
                   </div>
+                }
+                tags={project.tags}
+                imageHeight="h-64"
+                className="bg-gray-50 dark:bg-gray-800 w-full max-w-md"
+                actions={
                   <div className="flex gap-4">
                     <a
                       href={project.github}
@@ -83,8 +73,8 @@ export default function ProjectsPage() {
                       Demo
                     </a>
                   </div>
-                </div>
-              </div>
+                }
+              />
             ))}
             </div>
           </div>
@@ -106,35 +96,19 @@ export default function ProjectsPage() {
           <div className="flex justify-center">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl justify-items-center w-full">
               {otherProjects.map((project, index) => (
-              <div
+              <ExpandableCard
                 key={index}
-                className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 w-full max-w-sm"
-              >
-                <div className="h-48 bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center text-white text-6xl">
-                  {getProjectIcon(index + featuredProjects.length)}
-                </div>
-                <div className="p-5">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm line-clamp-2">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.slice(0, 2).map((tag, i) => (
-                      <span
-                        key={i}
-                        className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {project.tags.length > 2 && (
-                      <span className="px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 text-xs rounded-full">
-                        +{project.tags.length - 2}
-                      </span>
-                    )}
+                title={project.title}
+                description={project.description}
+                imagePlaceholder={
+                  <div className="h-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center text-white text-6xl">
+                    {getProjectIcon(index + featuredProjects.length)}
                   </div>
+                }
+                tags={project.tags.slice(0, 2)}
+                imageHeight="h-48"
+                className="bg-white dark:bg-gray-900 w-full max-w-sm"
+                actions={
                   <div className="flex gap-2">
                     <a
                       href={project.github}
@@ -153,8 +127,8 @@ export default function ProjectsPage() {
                       Demo
                     </a>
                   </div>
-                </div>
-              </div>
+                }
+              />
             ))}
             </div>
           </div>
