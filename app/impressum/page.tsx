@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { personalInfo } from "@/lib/data";
+import PageHeader from "@/components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Impressum - Davi Meyer Portfolio",
@@ -9,15 +10,7 @@ export const metadata: Metadata = {
 export default function ImpressumPage() {
   return (
     <div className="pt-16">
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Impressum
-            </span>
-          </h1>
-        </div>
-      </section>
+      <PageHeader title="Impressum" />
 
       <section className="py-20 bg-white dark:bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { personalInfo, socialLinks } from "@/lib/data";
+import PageHeader from "@/components/PageHeader";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -41,18 +42,10 @@ export default function ContactPage() {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Kontakt
-            </span>
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
-            Nehmen Sie Kontakt mit mir auf - ich freue mich auf Ihre Nachricht!
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        title="Kontakt"
+        subtitle="Nehmen Sie Kontakt mit mir auf - ich freue mich auf Ihre Nachricht!"
+      />
 
       {/* Contact Content */}
       <section className="py-20 bg-white dark:bg-gray-900">

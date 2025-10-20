@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { about, personalInfo } from "@/lib/data";
 import ExpandableCard from "@/components/ExpandableCard";
+import PageHeader from "@/components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Über mich - Davi Meyer Portfolio",
@@ -11,18 +12,10 @@ export default function AboutPage() {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Über mich
-            </span>
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
-            Lerne mehr über meine Geschichte und was mich antreibt
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        title="Über mich"
+        subtitle="Lerne mehr über meine Geschichte und was mich antreibt"
+      />
 
       {/* About Content */}
       <section className="py-20 bg-white dark:bg-gray-900">
