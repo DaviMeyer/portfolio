@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import { experience, education, skills } from "@/lib/data";
 import PageHeader from "@/components/PageHeader";
+import SkillsCard from "@/components/SkillsCard";
+import { MapPin, Calendar, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Erfahrung - Davi Meyer Portfolio",
@@ -30,24 +32,12 @@ export default function ExperiencePage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {skills.map((skillGroup, index) => (
-              <div
+              <SkillsCard
                 key={index}
-                className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              >
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-                  {skillGroup.category}
-                </h3>
-                <div className="flex flex-wrap gap-3 justify-center">
-                  {skillGroup.items.map((skill, i) => (
-                    <span
-                      key={i}
-                      className="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
+                category={skillGroup.category}
+                icon={skillGroup.icon || "terminal"}
+                items={skillGroup.items}
+              />
             ))}
           </div>
         </div>
@@ -96,13 +86,13 @@ export default function ExperiencePage() {
                           <p className="text-blue-600 dark:text-blue-400 font-semibold mb-1">
                             {exp.company}
                           </p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            📍 {exp.location}
+                          <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-1">
+                            <MapPin size={14} /> {exp.location}
                           </p>
                         </div>
                       </div>
-                      <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                        🗓 {exp.period}
+                      <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-1">
+                        <Calendar size={14} /> {exp.period}
                       </p>
                       <p className="text-gray-600 dark:text-gray-400 mb-4">
                         {exp.description}
@@ -115,9 +105,9 @@ export default function ExperiencePage() {
                           {exp.achievements.map((achievement, i) => (
                             <li
                               key={i}
-                              className="text-sm text-gray-600 dark:text-gray-400 flex items-start"
+                              className="text-sm text-gray-600 dark:text-gray-400 flex items-start gap-2"
                             >
-                              <span className="text-blue-600 mr-2">✓</span>
+                              <CheckCircle size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
                               {achievement}
                             </li>
                           ))}
@@ -156,7 +146,9 @@ export default function ExperiencePage() {
                     <p className="text-xl text-blue-100 mb-1">
                       {edu.institution}
                     </p>
-                    <p className="text-blue-100">📍 {edu.location}</p>
+                    <p className="text-blue-100 flex items-center gap-1">
+                      <MapPin size={16} /> {edu.location}
+                    </p>
                   </div>
                   <span className="text-lg font-semibold bg-white/20 px-4 py-2 rounded-lg">
                     {edu.period}

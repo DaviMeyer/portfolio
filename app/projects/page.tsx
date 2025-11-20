@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { projects } from "@/lib/data";
 import ExpandableCard from "@/components/ExpandableCard";
 import PageHeader from "@/components/PageHeader";
+import { Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Projekte - Davi Meyer Portfolio",
@@ -24,8 +25,8 @@ export default function ProjectsPage() {
       <section className="py-20 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 text-center">
-              ⭐ Featured Projects
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 text-center flex items-center justify-center gap-3">
+              <Sparkles className="text-yellow-500" size={36} /> Featured Projects
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 text-center">
               Projekte, auf die ich besonders stolz bin

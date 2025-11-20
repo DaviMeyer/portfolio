@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { about, personalInfo } from "@/lib/data";
-import ExpandableCard from "@/components/ExpandableCard";
 import PageHeader from "@/components/PageHeader";
+import HobbyCard from "@/components/HobbyCard";
+import { MapPin, Briefcase, Mail } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Über mich - Davi Meyer Portfolio",
@@ -47,13 +48,11 @@ export default function AboutPage() {
           <div className="flex justify-center">
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl">
               {about.hobbies.map((hobby, index) => (
-                <ExpandableCard
+                <HobbyCard
                   key={index}
                   title={hobby.title}
                   description={hobby.description}
-                  image={hobby.image || "/hobbies/wandern.jpg"}
-                  imageHeight="h-48"
-                  className="bg-white dark:bg-gray-900"
+                  icon={hobby.icon || "music"}
                 />
               ))}
             </div>
@@ -69,14 +68,14 @@ export default function AboutPage() {
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <div className="flex items-center space-x-3 mb-4">
-                  <span className="text-2xl">📍</span>
+                  <MapPin size={24} />
                   <div>
                     <p className="font-semibold">Standort</p>
                     <p className="text-blue-100">{personalInfo.location}</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <span className="text-2xl">💼</span>
+                  <Briefcase size={24} />
                   <div>
                     <p className="font-semibold">Position</p>
                     <p className="text-blue-100">{personalInfo.title}</p>
@@ -85,7 +84,7 @@ export default function AboutPage() {
               </div>
               <div>
                 <div className="flex items-center space-x-3">
-                  <span className="text-2xl">📧</span>
+                  <Mail size={24} />
                   <div>
                     <p className="font-semibold">E-Mail</p>
                     <a

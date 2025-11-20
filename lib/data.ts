@@ -16,6 +16,11 @@ export const socialLinks = [
     url: "https://github.com/DaviMeyer",
     icon: "github",
   },
+  {
+    name: "LinkedIn",
+    url: "#",
+    icon: "linkedin",
+  }
 ];
 
 export const about = {
@@ -28,21 +33,25 @@ export const about = {
     {
       title: "Sport",
       description: "Krafttraining im Fitnessstudio und Ausdauersport",
+      icon: "sport",
       image: "/hobbies/gym.jpg",
     },
     {
       title: "Wandern",
       description: "Natur geniessen und neue Orte erkunden",
+      icon: "hiking",
       image: "/hobbies/wandern.jpg",
     },
     {
       title: "Gaming",
       description: "Entspannen und mit Freunden spielen",
+      icon: "gaming",
       image: "/hobbies/wandern.jpg",
     },
     {
       title: "Klavier",
       description: "Musikalisch begeistert",
+      icon: "music",
       image: "/hobbies/wandern.jpg",
     },
   ],
@@ -51,14 +60,17 @@ export const about = {
 export const skills = [
   {
     category: "Frontend",
+    icon: "monitor",
     items: ["React", "Angular", "Next.js", "TypeScript", "Tailwind CSS", "HTML/CSS"],
   },
   {
     category: "Backend",
+    icon: "database",
     items: ["Spring Boot", "Node.js", "Express", "MariaDB"],
   },
   {
     category: "Tools & Others",
+    icon: "terminal",
     items: ["Git", "Docker", "AWS", "CI/CD", "Agile/Scrum"],
   },
 ];

@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import { personalInfo, socialLinks } from "@/lib/data";
+import { personalInfo } from "@/lib/data";
 import PageHeader from "@/components/PageHeader";
+import SocialLinks from "@/components/SocialLinks";
+import { Mail, MapPin, Clock } from "lucide-react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -64,7 +65,9 @@ export default function ContactPage() {
               <div className="space-y-6">
                 {/* Email */}
                 <div className="flex items-start space-x-4">
-                  <div className="text-3xl">📧</div>
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Mail className="text-blue-600 dark:text-blue-400" size={24} />
+                  </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
                       E-Mail
@@ -80,7 +83,9 @@ export default function ContactPage() {
 
                 {/* Location */}
                 <div className="flex items-start space-x-4">
-                  <div className="text-3xl">📍</div>
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin className="text-blue-600 dark:text-blue-400" size={24} />
+                  </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
                       Standort
@@ -93,7 +98,9 @@ export default function ContactPage() {
 
                 {/* Availability */}
                 <div className="flex items-start space-x-4">
-                  <div className="text-3xl">🕐</div>
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Clock className="text-blue-600 dark:text-blue-400" size={24} />
+                  </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
                       Verfügbarkeit
@@ -110,26 +117,7 @@ export default function ContactPage() {
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                   Folgen Sie mir
                 </h3>
-                <div className="flex space-x-4">
-                  {socialLinks.map((link) => (
-                    <a
-                      key={link.name}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
-                      aria-label={link.name}
-                    >
-                      <Image
-                        src="/github.svg"
-                        alt="GitHub"
-                        width={24}
-                        height={24}
-                        className="dark:invert"
-                      />
-                    </a>
-                  ))}
-                </div>
+                <SocialLinks />
               </div>
             </div>
 
@@ -259,9 +247,9 @@ export default function ContactPage() {
           </p>
           <a
             href={`mailto:${personalInfo.email}`}
-            className="inline-block px-8 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors font-medium shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors font-medium shadow-lg hover:shadow-xl"
           >
-            📧 E-Mail schreiben
+            <Mail size={20} /> E-Mail schreiben
           </a>
         </div>
       </section>
