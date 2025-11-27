@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Music, Dumbbell, Mountain, Gamepad2 } from 'lucide-react';
+import { useTheme } from '@/context/ThemeContext';
 
 interface HobbyItem {
     id: number;
@@ -34,6 +35,8 @@ const itemVariants = {
 };
 
 const Hobbies = () => {
+    const { theme } = useTheme();
+
     return (
         <section id="hobbies" className="py-24 px-6 relative z-10">
             <div className="max-w-6xl mx-auto">
@@ -59,9 +62,9 @@ const Hobbies = () => {
                             key={hobby.id}
                             variants={itemVariants}
                             whileHover={{ y: -5 }}
-                            className="p-6 rounded-2xl bg-gradient-to-br from-slate-800/40 to-slate-900/40 border border-white/5 hover:border-orange-500/30 group text-center backdrop-blur-sm transition-all"
+                            className={`p-6 rounded-2xl bg-gradient-to-br from-slate-800/40 to-slate-900/40 border border-white/5 hover:border-${theme.tailwind}-500/30 group text-center backdrop-blur-sm transition-all`}
                         >
-                            <div className="mx-auto w-16 h-16 rounded-full bg-slate-800/50 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-orange-500/20 group-hover:text-orange-400 transition-all duration-300 text-slate-300">
+                            <div className={`mx-auto w-16 h-16 rounded-full bg-slate-800/50 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-${theme.tailwind}-500/20 group-hover:to-${theme.secondary}-500/20 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-${theme.tailwind}-400 group-hover:to-${theme.secondary}-400 transition-all duration-300 text-slate-300`}>
                                 {hobby.icon}
                             </div>
                             <h3 className="text-lg font-bold text-white mb-2">{hobby.name}</h3>

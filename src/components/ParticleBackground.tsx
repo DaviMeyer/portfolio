@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import { useTheme } from '@/context/ThemeContext';
 
 export type EffectType =
     | 'off'
@@ -23,6 +24,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
     const mouseRef = useRef({ x: -1000, y: -1000 });
     const lastMouseMoveRef = useRef(0);
     const autoMouseRef = useRef({ x: 0, y: 0 });
+    const { theme } = useTheme();
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -36,6 +38,11 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
         let height = containerRef.current.clientHeight;
 
         autoMouseRef.current = { x: width / 2, y: height / 2 };
+
+        // Helper to get current theme color in HSL format for canvas
+        const getThemeColor = (opacity = 1) => {
+            return `hsl(${theme.primary} / ${opacity})`;
+        };
 
         // --- Init Logic ---
 
@@ -119,7 +126,8 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                     frequency: 0.002 + Math.random() * 0.001,
                     speed: 0.0002 + Math.random() * 0.0004,
                     offset: Math.random() * 1000,
-                    color: i === 0 ? 'rgba(249, 115, 22, 0.4)' : (i === 1 ? 'rgba(251, 191, 36, 0.3)' : 'rgba(239, 68, 68, 0.2)')
+                    // Aurora uses theme color + variations
+                    color: i === 0 ? getThemeColor(0.4) : getThemeColor(0.2)
                 });
             }
         };
@@ -207,7 +215,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                     ctx.beginPath();
                     ctx.moveTo(p.history[0].x, p.history[0].y);
                     for (let i = 1; i < p.history.length; i++) ctx.lineTo(p.history[i].x, p.history[i].y);
-                    ctx.strokeStyle = 'rgba(249, 115, 22, 0.5)';
+                    ctx.strokeStyle = getThemeColor(0.5);
                     ctx.stroke();
                 }
             });
@@ -226,7 +234,9 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                 p.angle += p.speed;
                 const x = targetCx + Math.cos(p.angle) * p.radius;
                 const y = targetCy + Math.sin(p.angle) * p.radius;
-                ctx.fillStyle = `rgba(249, 115, 22, ${0.8 - (p.radius / Math.min(width, height))})`;
+                // Calculate opacity based on radius
+                const alpha = 0.8 - (p.radius / Math.min(width, height));
+                ctx.fillStyle = getThemeColor(alpha);
                 ctx.beginPath();
                 ctx.arc(x, y, p.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -254,7 +264,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                         size = 5;
                         ctx.fillStyle = '#fff';
                     } else {
-                        ctx.fillStyle = s === 0 ? '#f97316' : '#ef4444';
+                        ctx.fillStyle = s === 0 ? getThemeColor() : getThemeColor(0.5);
                     }
                     ctx.beginPath();
                     ctx.arc(x, y, size, 0, Math.PI * 2);
@@ -286,7 +296,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                 const x = p.baseX + activeOffset;
                 const y = p.baseY + activeOffset;
                 const size = (mouseInfluence * 3) + 1;
-                const color = mouseInfluence > 0.5 ? '#fff' : '#f97316';
+                const color = mouseInfluence > 0.5 ? '#fff' : getThemeColor();
                 ctx.fillStyle = color;
                 ctx.fillRect(x, y, size, size);
             });
@@ -307,7 +317,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                 if (dist < 300) {
                     const influence = 1 - (dist / 300);
                     length = 10 + (influence * 15);
-                    color = `rgba(249, 115, 22, ${0.3 + influence * 0.7})`;
+                    color = getThemeColor(0.3 + influence * 0.7);
                 } else {
                     activeAngle = Math.PI / 4;
                 }
@@ -342,7 +352,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                 p.vx *= 0.99; p.vy *= 0.99;
                 p.x += p.vx; p.y += p.vy;
                 const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-                const color = speed > 3 ? '#fff' : '#f97316';
+                const color = speed > 3 ? '#fff' : getThemeColor();
                 ctx.fillStyle = color;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -372,7 +382,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
 
                 const gradient = ctx.createLinearGradient(0, height / 2, 0, 0);
                 gradient.addColorStop(0, p.color);
-                gradient.addColorStop(0.5, p.color.replace('0.4', '0.1').replace('0.3', '0.1'));
+                gradient.addColorStop(0.5, p.color.replace('0.4', '0.1').replace('0.2', '0.05'));
                 gradient.addColorStop(1, 'rgba(0,0,0,0)');
 
                 ctx.fillStyle = gradient;
@@ -405,8 +415,8 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                     p.y += dy * 0.01;
                 }
                 const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 4);
-                gradient.addColorStop(0, `rgba(251, 191, 36, ${alpha})`);
-                gradient.addColorStop(1, 'rgba(251, 191, 36, 0)');
+                gradient.addColorStop(0, getThemeColor(alpha));
+                gradient.addColorStop(1, getThemeColor(0));
                 ctx.fillStyle = gradient;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size * 4, 0, Math.PI * 2);
@@ -441,9 +451,8 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
         };
 
         const handleResize = () => {
-            if (!containerRef.current) return;
-            width = containerRef.current.clientWidth;
-            height = containerRef.current.clientHeight;
+            width = containerRef.current!.clientWidth;
+            height = containerRef.current!.clientHeight;
             init();
         };
 
@@ -463,7 +472,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
             window.removeEventListener('mousemove', handleMouseMove);
             cancelAnimationFrame(animationFrameId);
         };
-    }, [effect]);
+    }, [effect, theme]); // Re-run when theme changes
 
     return (
         <div ref={containerRef} className="fixed inset-0 z-[-1] bg-slate-950">

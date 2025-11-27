@@ -3,8 +3,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { useTheme } from '@/context/ThemeContext';
 
 const Hero = () => {
+    const { theme } = useTheme();
+
     return (
         <section id="about" className="min-h-screen flex flex-col justify-center items-center px-6 pt-16 relative">
             <motion.div
@@ -19,8 +22,8 @@ const Hero = () => {
                     transition={{ delay: 0.2 }}
                     className="mb-6"
                 >
-                    <span className="inline-flex items-center px-3 py-1 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-400 text-xs font-mono tracking-wider">
-                        <span className="w-2 h-2 rounded-full bg-orange-500 mr-2 animate-pulse"></span>
+                    <span className={`inline-flex items-center px-3 py-1 rounded-full border border-${theme.tailwind}-500/30 bg-${theme.tailwind}-500/10 text-${theme.tailwind}-400 text-xs font-mono tracking-wider`}>
+                        <span className={`w-2 h-2 rounded-full bg-gradient-to-r from-${theme.tailwind}-500 to-${theme.secondary}-500 mr-2 animate-pulse`}></span>
                         AVAILABLE FOR PROJECTS
                     </span>
                 </motion.div>
@@ -30,7 +33,7 @@ const Hero = () => {
                 </h1>
 
                 <h2 className="text-2xl md:text-4xl font-light text-slate-400 mb-8">
-                    Full Stack Developer <span className="text-orange-400">&</span> Software Engineer
+                    Full Stack Developer <span className={`bg-clip-text text-transparent bg-gradient-to-r from-${theme.tailwind}-400 to-${theme.secondary}-400`}>&</span> Software Engineer
                 </h2>
 
                 <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
@@ -43,7 +46,7 @@ const Hero = () => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         href="#contact"
-                        className="px-8 py-3 bg-orange-500 text-slate-950 font-bold rounded-lg hover:bg-orange-400 transition-all shadow-[0_0_20px_rgba(249,115,22,0.3)]"
+                        className={`px-8 py-3 bg-gradient-to-r from-${theme.tailwind}-500 to-${theme.secondary}-500 text-slate-950 font-bold rounded-lg hover:from-${theme.tailwind}-400 hover:to-${theme.secondary}-400 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]`}
                     >
                         Contact Me
                     </motion.a>
