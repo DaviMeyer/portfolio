@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Train } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
+import { Gamepad2 } from 'lucide-react';
 
 interface ProjectItem {
     id: number;
@@ -22,6 +23,14 @@ const projectsData: ProjectItem[] = [
         description: 'A real-time departure application showing live tram schedules for the two stations located near the SIX Group offices.',
         icon: <Train className="w-10 h-10" />,
         tags: ['Live Data', 'Frontend', 'API Integration']
+    },
+    {
+        id: 2,
+        title: 'Neon Gravity Game',
+        link: 'https://neon-gravity.davimeyer.dev',
+        description: 'A game in which you control a neon ball and aim to eat as many green balls as possible while avoiding dangerous spikes.',
+        icon: <Gamepad2 className="w-10 h-10" />,
+        tags: ['Game', 'Frontend', 'Canvas', 'Physics']
     }
 ];
 
