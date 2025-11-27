@@ -78,9 +78,9 @@ const Projects = () => {
                             </div>
 
                             <div className="flex items-start gap-4 mb-6">
-                                <div className={`p-3 rounded-xl bg-slate-800/50 text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-${theme.tailwind}-400 group-hover:to-${theme.secondary}-400 transition-colors`}>
+                                <div className={`p-3 rounded-xl bg-slate-800/50 text-white group-hover:text-${theme.tailwind}-400 transition-colors`}>
                                     {/* Clone element to add dynamic classes to the icon */}
-                                    {React.cloneElement(project.icon as any, { className: `w-10 h-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-${theme.tailwind}-400 group-hover:to-${theme.secondary}-400 transition-colors` })}
+                                    {React.cloneElement(project.icon as any, { className: `w-10 h-10 group-hover:text-${theme.tailwind}-400 transition-colors` })}
                                 </div>
                                 <div>
                                     <h3 className={`text-xl font-bold text-white mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-${theme.tailwind}-400 group-hover:to-${theme.secondary}-400 transition-colors`}>{project.title}</h3>

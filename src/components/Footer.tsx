@@ -15,10 +15,10 @@ const Footer = () => {
                 <h2 className="text-2xl font-bold text-white mb-8">Let's build something great together!</h2>
 
                 <div className="flex justify-center gap-6 mb-12">
-                    <a href="https://github.com/DaviMeyer" target="_blank" rel="noopener noreferrer" className={`p-3 rounded-full bg-slate-900 border border-white/10 hover:border-${theme.tailwind}-400 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-${theme.tailwind}-400 hover:to-${theme.secondary}-400 transition-all text-slate-400 group`}>
+                    <a href="https://github.com/DaviMeyer" target="_blank" rel="noopener noreferrer" className={`p-3 rounded-full bg-slate-900 border border-white/10 hover:border-${theme.tailwind}-400 hover:text-${theme.tailwind}-400 transition-all text-slate-400 group`}>
                         <Github className="w-6 h-6 transform group-hover:scale-110 transition-transform" />
                     </a>
-                    <a href="mailto:contact@davimeyer.dev" className={`p-3 rounded-full bg-slate-900 border border-white/10 hover:border-${theme.secondary}-400 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-${theme.secondary}-400 hover:to-${theme.tailwind}-400 transition-all text-slate-400 group`}>
+                    <a href="mailto:contact@davimeyer.dev" className={`p-3 rounded-full bg-slate-900 border border-white/10 hover:border-${theme.secondary}-400 hover:text-${theme.secondary}-400 transition-all text-slate-400 group`}>
                         <Mail className="w-6 h-6 transform group-hover:scale-110 transition-transform" />
                     </a>
                 </div>

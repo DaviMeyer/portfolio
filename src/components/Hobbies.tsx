@@ -64,7 +64,7 @@ const Hobbies = () => {
                             whileHover={{ y: -5 }}
                             className={`p-6 rounded-2xl bg-gradient-to-br from-slate-800/40 to-slate-900/40 border border-white/5 hover:border-${theme.tailwind}-500/30 group text-center backdrop-blur-sm transition-all`}
                         >
-                            <div className={`mx-auto w-16 h-16 rounded-full bg-slate-800/50 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-${theme.tailwind}-500/20 group-hover:to-${theme.secondary}-500/20 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-${theme.tailwind}-400 group-hover:to-${theme.secondary}-400 transition-all duration-300 text-slate-300`}>
+                            <div className={`mx-auto w-16 h-16 rounded-full bg-slate-800/50 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-${theme.tailwind}-500/20 group-hover:text-${theme.tailwind}-400 transition-all duration-300 text-slate-300`}>
                                 {hobby.icon}
                             </div>
                             <h3 className="text-lg font-bold text-white mb-2">{hobby.name}</h3>
