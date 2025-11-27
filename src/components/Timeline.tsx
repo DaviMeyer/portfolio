@@ -118,7 +118,7 @@ const Timeline = () => {
                         <div className={`group relative p-6 bg-slate-900/40 border border-white/5 rounded-2xl hover:border-${theme.tailwind}-500/30 hover:bg-slate-900/60 transition-all duration-300 backdrop-blur-sm`}>
                             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                                 <div className="flex items-center gap-3">
-                                    <div className={`p-2 rounded-lg bg-slate-800/50 text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-${theme.tailwind}-400 group-hover:to-${theme.secondary}-400 transition-colors`}>
+                                    <div className={`p-2 rounded-lg bg-slate-800/50 text-white group-hover:text-${theme.tailwind}-400 transition-colors`}>
                                         {item.icon}
                                     </div>
                                     <div>
