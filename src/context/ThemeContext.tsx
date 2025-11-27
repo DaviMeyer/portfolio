@@ -24,6 +24,10 @@ const ThemeContext = createContext<ThemeContextType>({
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const [theme, setTheme] = useState(presetColors[3]);
 
+    React.useEffect(() => {
+        document.documentElement.style.setProperty('--theme-primary', theme.primary);
+    }, [theme]);
+
     return (
         <ThemeContext.Provider value={{ theme, setTheme }}>
             {children}
