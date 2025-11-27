@@ -14,6 +14,20 @@ interface ThemeSwitcherProps {
 const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const { theme, setTheme } = useTheme();
+    const containerRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     const effects: { id: EffectType, label: string }[] = [
         { id: 'off', label: 'No Animation' },
@@ -28,7 +42,7 @@ const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
     ];
 
     return (
-        <div className="fixed bottom-6 right-6 z-50">
+        <div ref={containerRef} className="fixed bottom-6 right-6 z-50">
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -70,9 +84,6 @@ const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
                             <h3 className="text-white font-bold text-xs uppercase tracking-wider text-slate-400">
                                 Background FX
                             </h3>
-                            <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white">
-                                <Minimize2 className="w-4 h-4" />
-                            </button>
                         </div>
                         <div className="space-y-1 max-h-[250px] overflow-y-auto pr-2 custom-scrollbar">
                             {effects.map((effect) => (
