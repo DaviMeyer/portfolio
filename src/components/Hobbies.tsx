@@ -2,11 +2,40 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { hobbiesData } from '@/data/portfolio';
+import { Music, Dumbbell, Mountain, Gamepad2 } from 'lucide-react';
+
+interface HobbyItem {
+    id: number;
+    name: string;
+    desc: string;
+    icon: React.ReactNode;
+}
+
+const hobbiesData: HobbyItem[] = [
+    { id: 1, name: 'Piano', desc: 'Classical & Modern', icon: <Music className="w-10 h-10" /> },
+    { id: 2, name: 'Gym', desc: 'Fitness & Discipline', icon: <Dumbbell className="w-10 h-10" /> },
+    { id: 3, name: 'Hiking', desc: 'Nature & Endurance', icon: <Mountain className="w-10 h-10" /> },
+    { id: 4, name: 'Gaming', desc: 'Strategy & Fun', icon: <Gamepad2 className="w-10 h-10" /> },
+];
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1
+        }
+    }
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
 
 const Hobbies = () => {
     return (
-        <section id="hobbies" className="py-24 px-6 bg-slate-900/30 relative z-10">
+        <section id="hobbies" className="py-24 px-6 relative z-10">
             <div className="max-w-6xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -18,14 +47,17 @@ const Hobbies = () => {
                     <p className="text-slate-400">Balance and passions outside of the digital world.</p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {hobbiesData.map((hobby, index) => (
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                >
+                    {hobbiesData.map((hobby) => (
                         <motion.div
                             key={hobby.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
+                            variants={itemVariants}
                             whileHover={{ y: -5 }}
                             className="p-6 rounded-2xl bg-gradient-to-br from-slate-800/40 to-slate-900/40 border border-white/5 hover:border-orange-500/30 group text-center backdrop-blur-sm transition-all"
                         >
@@ -36,7 +68,7 @@ const Hobbies = () => {
                             <p className="text-sm text-slate-400">{hobby.desc}</p>
                         </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );

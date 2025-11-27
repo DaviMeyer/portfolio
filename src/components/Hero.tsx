@@ -30,12 +30,12 @@ const Hero = () => {
                 </h1>
 
                 <h2 className="text-2xl md:text-4xl font-light text-slate-400 mb-8">
-                    Software Engineer <span className="text-orange-400">&</span> Frontend Expert
+                    Full Stack Developer <span className="text-orange-400">&</span> Software Engineer
                 </h2>
 
                 <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
                     Building digital experiences at <strong className="text-white">SIX Group</strong>.
-                    Specialized in modern web development, crafting intuitive UIs, and robust frontend architectures.
+                    Specialized in building scalable full-stack applications, from database design to responsive user interfaces.
                 </p>
 
                 <div className="flex gap-4 justify-center">

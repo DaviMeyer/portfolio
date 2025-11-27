@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 const Navbar = () => {
@@ -10,6 +12,7 @@ const Navbar = () => {
                 <div className="flex gap-6 text-sm font-medium text-slate-300">
                     <a href="#about" className="hover:text-orange-400 transition-colors">About</a>
                     <a href="#cv" className="hover:text-orange-400 transition-colors">Resume</a>
+                    <a href="#projects" className="hover:text-orange-400 transition-colors">Projects</a>
                     <a href="#hobbies" className="hover:text-orange-400 transition-colors">Hobbies</a>
                 </div>
             </div>
