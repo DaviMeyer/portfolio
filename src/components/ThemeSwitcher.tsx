@@ -57,24 +57,27 @@ const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
                                 Appearance
                             </h3>
                             <div className={`grid grid-cols-3 gap-1 p-1 rounded-lg ${resolvedMode === 'dark' ? 'bg-slate-950' : 'bg-slate-100'}`}>
-                                {(['dark', 'light', 'system'] as const).map((m) => (
-                                    <button
-                                        key={m}
-                                        onClick={() => setMode(m)}
-                                        className={`
-                                            flex items-center justify-center py-2 rounded-md transition-all text-xs font-medium
-                                            ${mode === m
-                                                ? (resolvedMode === 'dark' ? 'bg-slate-800 text-white shadow-lg' : 'bg-white text-slate-900 shadow-sm')
-                                                : (resolvedMode === 'dark' ? 'text-slate-400 hover:text-slate-200' : 'text-slate-500 hover:text-slate-700')
-                                            }
-                                        `}
-                                    >
-                                        {m === 'dark' && <Moon className="w-3.5 h-3.5 mr-1" />}
-                                        {m === 'light' && <Sun className="w-3.5 h-3.5 mr-1" />}
-                                        {m === 'system' && <Laptop className="w-3.5 h-3.5 mr-1" />}
-                                        {m.charAt(0).toUpperCase() + m.slice(1)}
-                                    </button>
-                                ))}
+                                {(['dark', 'light', 'system'] as const).map((m) => {
+                                    const label = m === 'light' ? 'Bright' : m.charAt(0).toUpperCase() + m.slice(1);
+                                    return (
+                                        <button
+                                            key={m}
+                                            onClick={() => setMode(m)}
+                                            className={`
+                                                flex items-center justify-center py-2 rounded-md transition-all text-xs font-medium
+                                                ${mode === m
+                                                    ? (resolvedMode === 'dark' ? 'bg-slate-800 text-white shadow-lg' : 'bg-white text-slate-900 shadow-sm')
+                                                    : (resolvedMode === 'dark' ? 'text-slate-400 hover:text-slate-200' : 'text-slate-500 hover:text-slate-700')
+                                                }
+                                            `}
+                                        >
+                                            {m === 'dark' && <Moon className="w-3.5 h-3.5 mr-1" />}
+                                            {m === 'light' && <Sun className="w-3.5 h-3.5 mr-1" />}
+                                            {m === 'system' && <Laptop className="w-3.5 h-3.5 mr-1" />}
+                                            {label}
+                                        </button>
+                                    );
+                                })}
                             </div>
                         </div>
 
