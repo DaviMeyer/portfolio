@@ -35,7 +35,7 @@ const itemVariants = {
 };
 
 const Hobbies = () => {
-    const { theme } = useTheme();
+    const { theme, resolvedMode } = useTheme();
 
     return (
         <section id="hobbies" className="py-24 px-6 relative z-10">
@@ -46,8 +46,8 @@ const Hobbies = () => {
                     viewport={{ once: true }}
                     className="mb-16 text-center"
                 >
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-100 mb-4">Beyond Coding</h2>
-                    <p className="text-slate-400">Balance and passions outside of the digital world.</p>
+                    <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${resolvedMode === 'dark' ? 'text-slate-100' : 'text-slate-900'}`}>Beyond Coding</h2>
+                    <p className={`${resolvedMode === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>Balance and passions outside of the digital world.</p>
                 </motion.div>
 
                 <motion.div
@@ -62,13 +62,13 @@ const Hobbies = () => {
                             key={hobby.id}
                             variants={itemVariants}
                             whileHover={{ y: -5 }}
-                            className={`p-6 rounded-2xl bg-gradient-to-br from-slate-800/40 to-slate-900/40 border border-white/5 hover:border-${theme.tailwind}-500/30 group text-center backdrop-blur-sm transition-all`}
+                            className={`p-6 rounded-2xl border hover:border-${theme.tailwind}-500/30 group text-center backdrop-blur-sm transition-all ${resolvedMode === 'dark' ? 'bg-gradient-to-br from-slate-800/40 to-slate-900/40 border-white/5' : 'bg-gradient-to-br from-white/60 to-slate-50/60 border-slate-200 hover:shadow-lg hover:shadow-slate-200/50'}`}
                         >
-                            <div className={`mx-auto w-16 h-16 rounded-full bg-slate-800/50 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-${theme.tailwind}-500/20 group-hover:text-${theme.tailwind}-400 transition-all duration-300 text-slate-300`}>
+                            <div className={`mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-${theme.tailwind}-500/20 group-hover:text-${theme.tailwind}-500 transition-all duration-300 ${resolvedMode === 'dark' ? 'bg-slate-800/50 text-slate-300' : 'bg-slate-100 text-slate-600'}`}>
                                 {hobby.icon}
                             </div>
-                            <h3 className="text-lg font-bold text-white mb-2">{hobby.name}</h3>
-                            <p className="text-sm text-slate-400">{hobby.desc}</p>
+                            <h3 className={`text-lg font-bold mb-2 ${resolvedMode === 'dark' ? 'text-white' : 'text-slate-900'}`}>{hobby.name}</h3>
+                            <p className={`text-sm ${resolvedMode === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>{hobby.desc}</p>
                         </motion.div>
                     ))}
                 </motion.div>

@@ -15,10 +15,10 @@ import { ThemeProvider, useTheme } from '@/context/ThemeContext';
 
 const PortfolioContent = () => {
   const [currentEffect, setCurrentEffect] = useState<EffectType>('magnetic-field');
-  const { theme } = useTheme();
+  const { theme, resolvedMode } = useTheme();
 
   return (
-    <div className={`min-h-screen text-slate-200 selection:bg-${theme.tailwind}-500/30 selection:text-${theme.tailwind}-200 font-sans`}>
+    <div className={`min-h-screen font-sans transition-colors duration-500 ${resolvedMode === 'dark' ? 'text-slate-200' : 'text-slate-900'} selection:bg-${theme.tailwind}-500/30 selection:text-${theme.tailwind}-500`}>
       <ThemeSafelist />
       <ScrollProgress />
       <ParticleBackground effect={currentEffect} />

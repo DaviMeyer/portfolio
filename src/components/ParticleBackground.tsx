@@ -24,7 +24,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
     const mouseRef = useRef({ x: -1000, y: -1000 });
     const lastMouseMoveRef = useRef(0);
     const autoMouseRef = useRef({ x: 0, y: 0 });
-    const { theme } = useTheme();
+    const { theme, resolvedMode } = useTheme();
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -126,7 +126,6 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                     frequency: 0.002 + Math.random() * 0.001,
                     speed: 0.0002 + Math.random() * 0.0004,
                     offset: Math.random() * 1000,
-                    // Aurora uses theme color + variations
                     color: i === 0 ? getThemeColor(0.4) : getThemeColor(0.2)
                 });
             }
@@ -178,9 +177,13 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
 
         // --- Draw Logic ---
 
+        // Define background clear color based on mode
+        const clearColor = resolvedMode === 'dark' ? 'rgba(2, 6, 23, 0.1)' : 'rgba(248, 250, 252, 0.15)';
+        const particleBaseAlpha = resolvedMode === 'dark' ? 0.5 : 0.8;
+
         const drawLiquidFlow = () => {
             const target = getTargetPosition();
-            ctx.fillStyle = 'rgba(2, 6, 23, 0.1)';
+            ctx.fillStyle = clearColor;
             ctx.fillRect(0, 0, width, height);
             const noise = (x: number, y: number) => Math.sin(x * 0.005) + Math.cos(y * 0.005);
 
@@ -215,7 +218,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                     ctx.beginPath();
                     ctx.moveTo(p.history[0].x, p.history[0].y);
                     for (let i = 1; i < p.history.length; i++) ctx.lineTo(p.history[i].x, p.history[i].y);
-                    ctx.strokeStyle = getThemeColor(0.5);
+                    ctx.strokeStyle = getThemeColor(particleBaseAlpha);
                     ctx.stroke();
                 }
             });
@@ -223,7 +226,8 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
 
         const drawGalaxySwirl = () => {
             const target = getTargetPosition();
-            ctx.fillStyle = 'rgba(2, 6, 23, 0.2)';
+            // Slightly more opaque clear for galaxy to reduce trailing mess
+            ctx.fillStyle = resolvedMode === 'dark' ? 'rgba(2, 6, 23, 0.2)' : 'rgba(248, 250, 252, 0.2)';
             ctx.fillRect(0, 0, width, height);
             const cx = width / 2;
             const cy = height / 2;
@@ -234,7 +238,6 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                 p.angle += p.speed;
                 const x = targetCx + Math.cos(p.angle) * p.radius;
                 const y = targetCy + Math.sin(p.angle) * p.radius;
-                // Calculate opacity based on radius
                 const alpha = 0.8 - (p.radius / Math.min(width, height));
                 ctx.fillStyle = getThemeColor(alpha);
                 ctx.beginPath();
@@ -244,8 +247,8 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
         };
 
         const drawDnaWaves = () => {
-            const target = getTargetPosition();
             ctx.clearRect(0, 0, width, height);
+            const target = getTargetPosition();
             const t = Date.now() * 0.001;
             const strands = 2;
             const amplitude = 50;
@@ -262,7 +265,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
 
                     if (dist < 100) {
                         size = 5;
-                        ctx.fillStyle = '#fff';
+                        ctx.fillStyle = resolvedMode === 'dark' ? '#fff' : '#000';
                     } else {
                         ctx.fillStyle = s === 0 ? getThemeColor() : getThemeColor(0.5);
                     }
@@ -273,7 +276,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                     if (s === 0 && particles[i]) {
                         const y2 = p.y + Math.sin(p.offset + t + Math.PI) * amplitude;
                         ctx.beginPath();
-                        ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+                        ctx.strokeStyle = resolvedMode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
                         ctx.moveTo(x, y);
                         ctx.lineTo(x, y2);
                         ctx.stroke();
@@ -284,7 +287,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
 
         const drawQuantumField = () => {
             const target = getTargetPosition();
-            ctx.fillStyle = 'rgba(2, 6, 23, 0.2)';
+            ctx.fillStyle = resolvedMode === 'dark' ? 'rgba(2, 6, 23, 0.2)' : 'rgba(248, 250, 252, 0.2)';
             ctx.fillRect(0, 0, width, height);
             const t = Date.now() * 0.002;
 
@@ -296,7 +299,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                 const x = p.baseX + activeOffset;
                 const y = p.baseY + activeOffset;
                 const size = (mouseInfluence * 3) + 1;
-                const color = mouseInfluence > 0.5 ? '#fff' : getThemeColor();
+                const color = mouseInfluence > 0.5 ? (resolvedMode === 'dark' ? '#fff' : '#000') : getThemeColor();
                 ctx.fillStyle = color;
                 ctx.fillRect(x, y, size, size);
             });
@@ -312,7 +315,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                 const targetAngle = Math.atan2(dy, dx);
                 let activeAngle = targetAngle;
                 let length = 10;
-                let color = 'rgba(148, 163, 184, 0.2)';
+                let color = resolvedMode === 'dark' ? 'rgba(148, 163, 184, 0.2)' : 'rgba(71, 85, 105, 0.2)';
 
                 if (dist < 300) {
                     const influence = 1 - (dist / 300);
@@ -336,7 +339,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
 
         const drawGravityWell = () => {
             const target = getTargetPosition();
-            ctx.fillStyle = 'rgba(2, 6, 23, 0.2)';
+            ctx.fillStyle = resolvedMode === 'dark' ? 'rgba(2, 6, 23, 0.2)' : 'rgba(248, 250, 252, 0.2)';
             ctx.fillRect(0, 0, width, height);
             particles.forEach(p => {
                 const dx = target.x - p.x;
@@ -352,7 +355,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                 p.vx *= 0.99; p.vy *= 0.99;
                 p.x += p.vx; p.y += p.vy;
                 const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-                const color = speed > 3 ? '#fff' : getThemeColor();
+                const color = speed > 3 ? (resolvedMode === 'dark' ? '#fff' : '#000') : getThemeColor();
                 ctx.fillStyle = color;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -364,7 +367,10 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
             ctx.clearRect(0, 0, width, height);
             const t = Date.now() * 1;
 
-            ctx.globalCompositeOperation = 'lighter';
+            // In light mode, 'lighter' composite mode doesn't show up on white bg
+            if (resolvedMode === 'dark') {
+                ctx.globalCompositeOperation = 'lighter';
+            }
 
             particles.forEach(p => {
                 ctx.beginPath();
@@ -372,7 +378,6 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                     const sine1 = Math.sin(x * p.frequency + t * p.speed + p.offset);
                     const sine2 = Math.sin(x * p.frequency * 2 + t * p.speed * 1.5);
                     const y = p.yBase + (sine1 + sine2) * p.amplitude;
-
                     if (x === 0) ctx.moveTo(x, y);
                     else ctx.lineTo(x, y);
                 }
@@ -421,7 +426,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size * 4, 0, Math.PI * 2);
                 ctx.fill();
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.fillStyle = resolvedMode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.5)';
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2);
                 ctx.fill();
@@ -472,11 +477,11 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
             window.removeEventListener('mousemove', handleMouseMove);
             cancelAnimationFrame(animationFrameId);
         };
-    }, [effect, theme]); // Re-run when theme changes
+    }, [effect, theme, resolvedMode]);
 
     return (
-        <div ref={containerRef} className="fixed inset-0 z-[-1] bg-slate-950">
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-900/20 to-slate-950/20 pointer-events-none z-0"></div>
+        <div ref={containerRef} className={`fixed inset-0 z-[-1] transition-colors duration-500 ${resolvedMode === 'dark' ? 'bg-slate-950' : 'bg-slate-50'}`}>
+            <div className={`absolute inset-0 bg-gradient-to-b ${resolvedMode === 'dark' ? 'from-slate-950/20 via-slate-900/20 to-slate-950/20' : 'from-slate-50/50 via-white/50 to-slate-50/50'} pointer-events-none z-0`}></div>
             <canvas ref={canvasRef} className="block w-full h-full z-10" />
         </div>
     );

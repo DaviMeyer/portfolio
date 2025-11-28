@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 export const presetColors = [
     { name: 'Blue', primary: '210 100% 60%', accent: '220 30% 15%', tailwind: 'blue', secondary: 'cyan' },
@@ -11,25 +11,56 @@ export const presetColors = [
     { name: 'Teal', primary: '173 80% 40%', accent: '173 30% 15%', tailwind: 'teal', secondary: 'emerald' },
 ];
 
+export type ThemeMode = 'dark' | 'light' | 'system';
+
 interface ThemeContextType {
     theme: typeof presetColors[0];
     setTheme: (theme: typeof presetColors[0]) => void;
+    mode: ThemeMode;
+    setMode: (mode: ThemeMode) => void;
+    resolvedMode: 'dark' | 'light';
 }
 
 const ThemeContext = createContext<ThemeContextType>({
     theme: presetColors[3], // Default to Orange
     setTheme: () => { },
+    mode: 'dark',
+    setMode: () => { },
+    resolvedMode: 'dark',
 });
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const [theme, setTheme] = useState(presetColors[3]);
+    const [mode, setMode] = useState<ThemeMode>('dark');
+    const [resolvedMode, setResolvedMode] = useState<'dark' | 'light'>('dark');
 
-    React.useEffect(() => {
+    useEffect(() => {
         document.documentElement.style.setProperty('--theme-primary', theme.primary);
     }, [theme]);
 
+    // Handle System Preference
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+        const handleChange = () => {
+            if (mode === 'system') {
+                setResolvedMode(mediaQuery.matches ? 'dark' : 'light');
+            }
+        };
+
+        // Initial check
+        if (mode === 'system') {
+            setResolvedMode(mediaQuery.matches ? 'dark' : 'light');
+        } else {
+            setResolvedMode(mode);
+        }
+
+        mediaQuery.addEventListener('change', handleChange);
+        return () => mediaQuery.removeEventListener('change', handleChange);
+    }, [mode]);
+
     return (
-        <ThemeContext.Provider value={{ theme, setTheme }}>
+        <ThemeContext.Provider value={{ theme, setTheme, mode, setMode, resolvedMode }}>
             {children}
         </ThemeContext.Provider>
     );

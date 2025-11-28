@@ -6,7 +6,7 @@ import { ChevronDown } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 
 const Hero = () => {
-    const { theme } = useTheme();
+    const { theme, resolvedMode } = useTheme();
 
     return (
         <section id="about" className="min-h-screen flex flex-col justify-center items-center px-6 pt-16 relative">
@@ -28,16 +28,16 @@ const Hero = () => {
                     </span>
                 </motion.div>
 
-                <h1 className="text-5xl md:text-7xl font-bold text-slate-100 mb-6 tracking-tight">
+                <h1 className={`text-5xl md:text-7xl font-bold mb-6 tracking-tight ${resolvedMode === 'dark' ? 'text-slate-100' : 'text-slate-900'}`}>
                     Davi Meyer
                 </h1>
 
-                <h2 className="text-2xl md:text-4xl font-light text-slate-400 mb-8">
+                <h2 className={`text-2xl md:text-4xl font-light mb-8 ${resolvedMode === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>
                     Full Stack Developer <span className={`bg-clip-text text-transparent bg-gradient-to-r from-${theme.tailwind}-400 to-${theme.secondary}-400`}>&</span> Software Engineer
                 </h2>
 
-                <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
-                    Building digital experiences at <strong className="text-white">SIX Group</strong>.
+                <p className={`text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10 ${resolvedMode === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>
+                    Building digital experiences at <strong className={resolvedMode === 'dark' ? 'text-white' : 'text-slate-900'}>SIX Group</strong>.
                     Specialized in building scalable full-stack applications, from database design to responsive user interfaces.
                 </p>
 
@@ -54,7 +54,7 @@ const Hero = () => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         href="#cv"
-                        className="px-8 py-3 bg-slate-800/50 border border-white/10 text-white font-medium rounded-lg hover:bg-slate-800 transition-colors backdrop-blur-sm"
+                        className={`px-8 py-3 border font-medium rounded-lg transition-colors backdrop-blur-sm ${resolvedMode === 'dark' ? 'bg-slate-800/50 border-white/10 text-white hover:bg-slate-800' : 'bg-white/50 border-slate-200 text-slate-800 hover:bg-white'}`}
                     >
                         View Resume
                     </motion.a>
@@ -65,9 +65,9 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 1 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10"
+                className={`absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10 ${resolvedMode === 'dark' ? 'text-slate-500' : 'text-slate-400'}`}
             >
-                <ChevronDown className="text-slate-500 w-6 h-6" />
+                <ChevronDown className="w-6 h-6" />
             </motion.div>
         </section>
     );

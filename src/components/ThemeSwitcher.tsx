@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Palette, Minimize2, ChevronDown, Check } from 'lucide-react';
+import { Palette, Minimize2, ChevronDown, Check, Moon, Sun, Laptop } from 'lucide-react';
 import { EffectType } from './ParticleBackground';
 import { useTheme, presetColors } from '@/context/ThemeContext';
 
@@ -13,7 +13,7 @@ interface ThemeSwitcherProps {
 
 const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
     const [isOpen, setIsOpen] = useState(false);
-    const { theme, setTheme } = useTheme();
+    const { theme, setTheme, mode, setMode, resolvedMode } = useTheme();
     const containerRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
@@ -49,11 +49,38 @@ const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
                         initial={{ opacity: 0, y: 20, scale: 0.9 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.9 }}
-                        className="absolute bottom-16 right-0 w-72 bg-slate-900/95 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl"
+                        className={`absolute bottom-16 right-0 w-72 backdrop-blur-xl border rounded-2xl p-4 shadow-2xl ${resolvedMode === 'dark' ? 'bg-slate-900/95 border-white/10' : 'bg-white/95 border-slate-200'}`}
                     >
+                        {/* Appearance Mode */}
+                        <div className={`mb-6 border-b pb-4 ${resolvedMode === 'dark' ? 'border-white/5' : 'border-slate-200'}`}>
+                            <h3 className={`font-bold text-xs uppercase tracking-wider mb-3 flex items-center gap-2 ${resolvedMode === 'dark' ? 'text-slate-400' : 'text-slate-500'}`}>
+                                Appearance
+                            </h3>
+                            <div className={`grid grid-cols-3 gap-1 p-1 rounded-lg ${resolvedMode === 'dark' ? 'bg-slate-950' : 'bg-slate-100'}`}>
+                                {(['dark', 'light', 'system'] as const).map((m) => (
+                                    <button
+                                        key={m}
+                                        onClick={() => setMode(m)}
+                                        className={`
+                                            flex items-center justify-center py-2 rounded-md transition-all text-xs font-medium
+                                            ${mode === m
+                                                ? (resolvedMode === 'dark' ? 'bg-slate-800 text-white shadow-lg' : 'bg-white text-slate-900 shadow-sm')
+                                                : (resolvedMode === 'dark' ? 'text-slate-400 hover:text-slate-200' : 'text-slate-500 hover:text-slate-700')
+                                            }
+                                        `}
+                                    >
+                                        {m === 'dark' && <Moon className="w-3.5 h-3.5 mr-1" />}
+                                        {m === 'light' && <Sun className="w-3.5 h-3.5 mr-1" />}
+                                        {m === 'system' && <Laptop className="w-3.5 h-3.5 mr-1" />}
+                                        {m.charAt(0).toUpperCase() + m.slice(1)}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
                         {/* Color Selection */}
-                        <div className="mb-6 border-b border-white/5 pb-4">
-                            <h3 className="text-white font-bold text-xs uppercase tracking-wider mb-3 flex items-center gap-2 text-slate-400">
+                        <div className={`mb-6 border-b pb-4 ${resolvedMode === 'dark' ? 'border-white/5' : 'border-slate-200'}`}>
+                            <h3 className={`font-bold text-xs uppercase tracking-wider mb-3 flex items-center gap-2 ${resolvedMode === 'dark' ? 'text-slate-400' : 'text-slate-500'}`}>
                                 Color Theme
                             </h3>
                             <div className="grid grid-cols-3 gap-2">
@@ -63,7 +90,10 @@ const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
                                         onClick={() => setTheme(color)}
                                         className={`
                                             relative h-10 rounded-lg border transition-all overflow-hidden flex items-center justify-center
-                                            ${theme.name === color.name ? `border-${color.tailwind}-400 ring-1 ring-${color.tailwind}-400/50` : 'border-white/10 hover:border-white/30'}
+                                            ${theme.name === color.name
+                                                ? `border-${color.tailwind}-400 ring-1 ring-${color.tailwind}-400/50`
+                                                : (resolvedMode === 'dark' ? 'border-white/10 hover:border-white/30' : 'border-slate-200 hover:border-slate-400')
+                                            }
                                         `}
                                         style={{
                                             background: `linear-gradient(135deg, hsl(${color.primary}) 0%, hsl(${color.accent}) 100%)`
@@ -80,10 +110,13 @@ const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
                         </div>
 
                         {/* Effect Selection */}
-                        <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-2">
-                            <h3 className="text-white font-bold text-xs uppercase tracking-wider text-slate-400">
+                        <div className={`flex items-center justify-between mb-4 border-b pb-2 ${resolvedMode === 'dark' ? 'border-white/5' : 'border-slate-200'}`}>
+                            <h3 className={`font-bold text-xs uppercase tracking-wider ${resolvedMode === 'dark' ? 'text-slate-400' : 'text-slate-500'}`}>
                                 Background FX
                             </h3>
+                            <button onClick={() => setIsOpen(false)} className={`${resolvedMode === 'dark' ? 'text-slate-400 hover:text-white' : 'text-slate-400 hover:text-slate-800'}`}>
+                                <Minimize2 className="w-4 h-4" />
+                            </button>
                         </div>
                         <div className="space-y-1 max-h-[250px] overflow-y-auto pr-2 custom-scrollbar">
                             {effects.map((effect) => (
@@ -91,8 +124,8 @@ const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
                                     key={effect.id}
                                     onClick={() => onChange(effect.id)}
                                     className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition-all ${current === effect.id
-                                        ? `bg-${theme.tailwind}-500/20 text-${theme.tailwind}-400 border border-${theme.tailwind}-500/30`
-                                        : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'
+                                        ? `bg-${theme.tailwind}-500/20 text-${theme.tailwind}-500 border border-${theme.tailwind}-500/30`
+                                        : (resolvedMode === 'dark' ? 'text-slate-400 hover:bg-white/5 hover:text-slate-200' : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900')
                                         }`}
                                 >
                                     {effect.label}
