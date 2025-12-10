@@ -44,7 +44,7 @@ export const timelineData: TimelineItem[] = [
         year: '2019 - 2022',
         title: 'Secondary School',
         place: 'Level A',
-        description: 'Successfully completed secondary education with a focus on natural sciences and mathematics.',
+        description: 'Successfully completed secondary education.',
         icon: React.createElement(Layers, { className: "w-6 h-6 text-slate-400" }),
         tags: ['School', 'Math', 'Logic']
     }
