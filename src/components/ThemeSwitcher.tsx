@@ -11,21 +11,22 @@ interface ThemeSwitcherProps {
     onChange: (e: EffectType) => void;
 }
 
-// CSS-variable-based colors so Prismatic animates everywhere
+// CSS-variable-based colors so Prismatic animates the switcher UI.
+// --theme-on-primary guarantees readable text/icons ON the primary color
+// (computed per-frame for Prismatic, once for static themes — see ThemeContext).
 const themeStyle = {
     bg:         { backgroundColor: 'hsl(var(--theme-primary) / 0.18)' },
     text:       { color:           'hsl(var(--theme-primary))' },
     border:     { border: '1px solid hsl(var(--theme-primary) / 0.35)' },
-    activeBtn:  {
-        backgroundColor: 'hsl(var(--theme-primary) / 0.18)',
-        color:           'hsl(var(--theme-primary))',
-        border:          '1px solid hsl(var(--theme-primary) / 0.35)',
-    },
     floatBtn:   {
         background: 'hsl(var(--theme-primary))',
+        color:      'hsl(var(--theme-on-primary))',
         boxShadow:  '0 8px 32px hsl(var(--theme-primary) / 0.45)',
     },
-    badgeBg:    { background: 'linear-gradient(135deg, hsl(var(--theme-primary)), hsl(var(--theme-primary) / 0.6))' },
+    badgeBg:    {
+        background: 'hsl(var(--theme-primary))',
+        color:      'hsl(var(--theme-on-primary))',
+    },
     leftBorder: { borderLeft: '2px solid hsl(var(--theme-primary) / 0.35)' },
 };
 
@@ -43,6 +44,14 @@ const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
     }, []);
 
     const isDark = resolvedMode === 'dark';
+
+    // On the light panel the raw primary can be near-white (esp. Prismatic's yellow phase),
+    // so use the darkened --theme-primary-text variant for text/border there.
+    const activeBtnStyle = {
+        backgroundColor: 'hsl(var(--theme-primary) / 0.18)',
+        color:           isDark ? 'hsl(var(--theme-primary))' : 'hsl(var(--theme-primary-text))',
+        border:          isDark ? '1px solid hsl(var(--theme-primary) / 0.35)' : '1px solid hsl(var(--theme-primary-text) / 0.45)',
+    };
 
     const effects: { id: EffectType; label: string }[] = [
         { id: 'off',            label: 'No Animation'   },
@@ -147,7 +156,7 @@ const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
                             <h3 className={`font-bold text-xs uppercase tracking-wider ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                                 Background FX
                             </h3>
-                            <button onClick={() => setIsOpen(false)} className={isDark ? 'text-slate-400 hover:text-white' : 'text-slate-400 hover:text-slate-800'}>
+                            <button onClick={() => setIsOpen(false)} className={isDark ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-slate-800'}>
                                 <Minimize2 className="w-4 h-4" />
                             </button>
                         </div>
@@ -159,7 +168,7 @@ const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
                                     className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition-all ${
                                         current !== fx.id && (isDark ? 'text-slate-400 hover:bg-white/5 hover:text-slate-200' : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900')
                                     }`}
-                                    style={current === fx.id ? themeStyle.activeBtn : {}}
+                                    style={current === fx.id ? activeBtnStyle : {}}
                                 >
                                     {fx.label}
                                 </button>
@@ -173,7 +182,7 @@ const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
                                     Signature FX
                                 </h3>
                                 <span
-                                    className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-full text-white"
+                                    className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-full"
                                     style={themeStyle.badgeBg}
                                 >
                                     NEW
@@ -187,7 +196,7 @@ const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
                                         className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition-all flex items-center gap-2 ${
                                             current !== fx.id && (isDark ? 'text-slate-300 hover:bg-white/5 hover:text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900')
                                         }`}
-                                        style={current === fx.id ? themeStyle.activeBtn : themeStyle.leftBorder}
+                                        style={current === fx.id ? activeBtnStyle : themeStyle.leftBorder}
                                     >
                                         <span className="text-base leading-none">{fx.icon}</span>
                                         <span>{fx.label}</span>
@@ -204,7 +213,7 @@ const ThemeSwitcher = ({ current, onChange }: ThemeSwitcherProps) => {
                 whileHover={{ scale: 1.06 }}
                 whileTap={{ scale: 0.94 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-4 text-white rounded-full transition-all flex items-center justify-center"
+                className="p-4 rounded-full transition-all flex items-center justify-center"
                 style={themeStyle.floatBtn}
             >
                 {isOpen ? <ChevronDown className="w-6 h-6" /> : <Palette className="w-6 h-6" />}

@@ -22,7 +22,7 @@ const Hero = () => {
                     transition={{ delay: 0.2 }}
                     className="mb-6"
                 >
-                    <span className={`inline-flex items-center px-3 py-1 rounded-full border border-${theme.tailwind}-500/30 bg-${theme.tailwind}-500/10 text-${theme.tailwind}-400 text-xs font-mono tracking-wider`}>
+                    <span className={`inline-flex items-center px-3 py-1 rounded-full border border-${theme.tailwind}-500/30 bg-${theme.tailwind}-500/10 ${resolvedMode === 'dark' ? `text-${theme.tailwind}-400` : `text-${theme.tailwind}-700`} text-xs font-mono tracking-wider`}>
                         <span className={`w-2 h-2 rounded-full bg-gradient-to-r from-${theme.tailwind}-500 to-${theme.secondary}-500 mr-2 animate-pulse`}></span>
                         AVAILABLE FOR PROJECTS
                     </span>
@@ -33,7 +33,7 @@ const Hero = () => {
                 </h1>
 
                 <h2 className={`text-2xl md:text-4xl font-light mb-8 ${resolvedMode === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Full Stack Developer <span className={`bg-clip-text text-transparent bg-gradient-to-r from-${theme.tailwind}-400 to-${theme.secondary}-400`}>&</span> Software Engineer
+                    Full Stack Developer <span className={`bg-clip-text text-transparent bg-gradient-to-r ${resolvedMode === 'dark' ? `from-${theme.tailwind}-400 to-${theme.secondary}-400` : `from-${theme.tailwind}-600 to-${theme.secondary}-600`}`}>&</span> Software Engineer
                 </h2>
 
                 <p className={`text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10 ${resolvedMode === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>
@@ -65,7 +65,7 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 1 }}
-                className={`absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10 ${resolvedMode === 'dark' ? 'text-slate-500' : 'text-slate-400'}`}
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10 text-slate-500"
             >
                 <ChevronDown className="w-6 h-6" />
             </motion.div>

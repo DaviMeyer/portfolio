@@ -57,7 +57,7 @@ const timelineData: TimelineItem[] = [
         year: '2019 - 2022',
         title: 'Secondary School',
         place: 'Level A',
-        description: 'Successfully completed secondary education with a focus on natural sciences and mathematics.',
+        description: 'Successfully completed secondary education.',
         icon: <Layers className="w-6 h-6 opacity-70" />,
         tags: ['School', 'Math', 'Logic']
     }
@@ -123,7 +123,7 @@ const Timeline = () => {
                                     </div>
                                     <div>
                                         <h3 className={`text-xl font-bold ${resolvedMode === 'dark' ? 'text-slate-100' : 'text-slate-800'}`}>{item.title}</h3>
-                                        <p className={`font-medium bg-clip-text text-transparent bg-gradient-to-r from-${theme.tailwind}-400 to-${theme.secondary}-400`}>{item.place}</p>
+                                        <p className={`font-medium bg-clip-text text-transparent bg-gradient-to-r ${resolvedMode === 'dark' ? `from-${theme.tailwind}-400 to-${theme.secondary}-400` : `from-${theme.tailwind}-600 to-${theme.secondary}-600`}`}>{item.place}</p>
                                     </div>
                                 </div>
                                 <span className={`mt-2 md:mt-0 px-3 py-1 text-xs font-mono rounded-full border ${resolvedMode === 'dark' ? 'bg-white/5 text-slate-400 border-white/5' : 'bg-slate-100 text-slate-600 border-slate-200'}`}>

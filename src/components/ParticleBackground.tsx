@@ -109,7 +109,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
             particles = Array.from({ length: 3 }, (_, i) => ({
                 yBase: height * 0.6 + i * 50, amplitude: 100 + Math.random() * 50,
                 frequency: 0.002 + Math.random() * 0.001, speed: 0.0002 + Math.random() * 0.0004,
-                offset: Math.random() * 1000, color: tc(i === 0 ? 0.4 : 0.2),
+                offset: Math.random() * 1000, baseAlpha: i === 0 ? 0.4 : 0.2,
             }));
         };
         const initFireFlies = () => {
@@ -372,7 +372,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                 }
                 ctx.lineTo(width,0);ctx.lineTo(0,0);ctx.closePath();
                 const g=ctx.createLinearGradient(0,height/2,0,0);
-                g.addColorStop(0,p.color);g.addColorStop(0.5,p.color.replace('0.4','0.1').replace('0.2','0.05'));g.addColorStop(1,'rgba(0,0,0,0)');
+                g.addColorStop(0,tc(p.baseAlpha));g.addColorStop(0.5,tc(p.baseAlpha*0.25));g.addColorStop(1,'rgba(0,0,0,0)');
                 ctx.fillStyle=g;ctx.fill();
             });
             ctx.globalCompositeOperation='source-over';
@@ -511,7 +511,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
 
         const drawFerrofluidPeaks = () => {
             const t = target(), ts = Date.now() * 0.001;
-            ctx.fillStyle = resolvedMode === 'dark' ? '#010308' : '#0a0a14';
+            ctx.fillStyle = resolvedMode === 'dark' ? '#010308' : '#e8ecf4';
             ctx.fillRect(0, 0, width, height);
 
             // Iridescent surface shimmer
@@ -535,7 +535,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                 const tipX = p.x + Math.sin(ts*0.32+p.phase)*p.h*3.5, tipY = p.y - sH;
 
                 ctx.beginPath(); ctx.ellipse(p.x, p.y, bW*0.75, 5, 0, 0, Math.PI*2);
-                ctx.fillStyle = 'rgba(0,0,0,0.4)'; ctx.fill();
+                ctx.fillStyle = resolvedMode === 'dark' ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.15)'; ctx.fill();
 
                 const sg = ctx.createLinearGradient(p.x, p.y, tipX, tipY);
                 sg.addColorStop(0, 'rgba(4,6,16,0.98)'); sg.addColorStop(0.45, 'rgba(7,10,22,0.95)');
@@ -549,7 +549,7 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
                 if (p.h > 0.22) {
                     const hg = ctx.createLinearGradient(p.x-bW*0.35, p.y, tipX-1, tipY+sH*0.1);
                     hg.addColorStop(0, 'rgba(0,0,0,0)'); hg.addColorStop(0.4, tc(p.h*0.5));
-                    hg.addColorStop(1, `rgba(255,255,255,${p.h*0.88})`);
+                    hg.addColorStop(1, resolvedMode === 'dark' ? `rgba(255,255,255,${p.h*0.88})` : `rgba(30,35,55,${p.h*0.88})`);
                     ctx.beginPath(); ctx.moveTo(p.x-bW*0.35, p.y);
                     ctx.quadraticCurveTo(tipX-bW*0.06, p.y-sH*0.5, tipX-1, tipY);
                     ctx.lineWidth = 1.2; ctx.strokeStyle = hg; ctx.stroke();

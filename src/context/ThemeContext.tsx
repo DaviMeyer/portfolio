@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode, useEffect, useRef } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect, useRef, useSyncExternalStore } from 'react';
 
 export const presetColors = [
     { name: 'Blue',      primary: '210 100% 60%', accent: '220 30% 15%', tailwind: 'blue',   secondary: 'cyan',    animated: false },
@@ -30,11 +30,43 @@ const ThemeContext = createContext<ThemeContextType>({
     resolvedMode: 'dark',
 });
 
+// WCAG relative luminance of an HSL color (h: 0-360, s/l: 0-100)
+const hslLuminance = (h: number, s: number, l: number) => {
+    s /= 100; l /= 100;
+    const k = (n: number) => (n + h / 30) % 12;
+    const a = s * Math.min(l, 1 - l);
+    const f = (n: number) => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+    const lin = (c: number) => (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+    return 0.2126 * lin(f(0)) + 0.7152 * lin(f(8)) + 0.0722 * lin(f(4));
+};
+
+// Sets --theme-primary plus two derived variables:
+//   --theme-on-primary:   readable text/icon color ON the primary color (dark navy on bright hues, white on dark hues)
+//   --theme-primary-text: darkened primary for text on light surfaces
+const setThemeVars = (h: number, s: number, l: number, raw: string) => {
+    const root = document.documentElement;
+    root.style.setProperty('--theme-primary', raw);
+    root.style.setProperty('--theme-on-primary', hslLuminance(h, s, l) > 0.2 ? '222 47% 11%' : '0 0% 100%');
+    root.style.setProperty('--theme-primary-text', `${h.toFixed(1)} ${Math.min(s, 85)}% ${Math.min(l, 30)}%`);
+};
+
+const subscribeSystemDark = (cb: () => void) => {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    mq.addEventListener('change', cb);
+    return () => mq.removeEventListener('change', cb);
+};
+
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const [theme, setTheme] = useState(presetColors[3]);
     const [mode, setMode] = useState<ThemeMode>('dark');
-    const [resolvedMode, setResolvedMode] = useState<'dark' | 'light'>('dark');
     const animRef = useRef<number | null>(null);
+
+    const systemDark = useSyncExternalStore(
+        subscribeSystemDark,
+        () => window.matchMedia('(prefers-color-scheme: dark)').matches,
+        () => true, // server snapshot: default dark
+    );
+    const resolvedMode: 'dark' | 'light' = mode === 'system' ? (systemDark ? 'dark' : 'light') : mode;
 
     useEffect(() => {
         if (animRef.current) cancelAnimationFrame(animRef.current);
@@ -42,28 +74,28 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
         if (theme.animated) {
             const tick = () => {
                 const t = Date.now();
-                // Rapid hue cycle (~8s full), full saturation, pulsing lightness 60–72%
+                // Rapid hue cycle (~4.8s full), full saturation, pulsing lightness 60–72%
                 const hue = (t * 0.075) % 360;
                 const light = 66 + 6 * Math.sin(t * 0.0018);
-                document.documentElement.style.setProperty('--theme-primary', `${hue.toFixed(1)} 100% ${light.toFixed(1)}%`);
+                setThemeVars(hue, 100, light, `${hue.toFixed(1)} 100% ${light.toFixed(1)}%`);
                 animRef.current = requestAnimationFrame(tick);
             };
             animRef.current = requestAnimationFrame(tick);
         } else {
-            document.documentElement.style.setProperty('--theme-primary', theme.primary);
+            const [h, s, l] = theme.primary.split(' ').map(parseFloat);
+            setThemeVars(h, s, l, theme.primary);
         }
 
         return () => { if (animRef.current) cancelAnimationFrame(animRef.current); };
     }, [theme]);
 
+    // Keep page background / native UI (scrollbar, overscroll) in sync with the resolved mode
     useEffect(() => {
-        const mq = window.matchMedia('(prefers-color-scheme: dark)');
-        const update = () => { if (mode === 'system') setResolvedMode(mq.matches ? 'dark' : 'light'); };
-        if (mode === 'system') setResolvedMode(mq.matches ? 'dark' : 'light');
-        else setResolvedMode(mode);
-        mq.addEventListener('change', update);
-        return () => mq.removeEventListener('change', update);
-    }, [mode]);
+        const root = document.documentElement;
+        root.style.setProperty('--background', resolvedMode === 'dark' ? '#020617' : '#f8fafc');
+        root.style.setProperty('--foreground', resolvedMode === 'dark' ? '#f8fafc' : '#0f172a');
+        root.style.colorScheme = resolvedMode;
+    }, [resolvedMode]);
 
     return (
         <ThemeContext.Provider value={{ theme, setTheme, mode, setMode, resolvedMode }}>

@@ -98,18 +98,18 @@ const Projects = () => {
                             whileHover={{ scale: 1.02 }}
                             className={`block p-8 rounded-2xl border hover:border-${theme.tailwind}-500/30 group backdrop-blur-sm transition-all relative overflow-hidden ${resolvedMode === 'dark' ? 'bg-gradient-to-br from-slate-800/40 to-slate-900/40 border-white/5' : 'bg-gradient-to-br from-white/60 to-slate-50/60 border-slate-200 hover:shadow-lg hover:shadow-slate-200/50'}`}
                         >
-                            <div className={`absolute top-4 right-4 group-hover:text-${theme.tailwind}-500 transition-colors ${resolvedMode === 'dark' ? 'text-slate-500' : 'text-slate-400'}`}>
+                            <div className={`absolute top-4 right-4 group-hover:text-${theme.tailwind}-500 transition-colors ${resolvedMode === 'dark' ? 'text-slate-400' : 'text-slate-500'}`}>
                                 <ExternalLink className="w-5 h-5" />
                             </div>
 
                             <div className="flex items-start gap-4 mb-6">
                                 <div className={`p-3 rounded-xl group-hover:text-${theme.tailwind}-500 transition-colors ${resolvedMode === 'dark' ? 'bg-slate-800/50 text-white' : 'bg-slate-100 text-slate-700'}`}>
-                                    {/* Clone element to add dynamic classes to the icon */}
-                                    {React.cloneElement(project.icon as any, { className: `w-10 h-10 group-hover:text-${theme.tailwind}-500 transition-colors` })}
+                                    {/* Icons inherit currentColor, so the wrapper's group-hover color applies directly */}
+                                    {project.icon}
                                 </div>
                                 <div>
                                     <h3 className={`text-xl font-bold mb-1 group-hover:text-${theme.tailwind}-500 transition-colors ${resolvedMode === 'dark' ? 'text-white' : 'text-slate-900'}`}>{project.title}</h3>
-                                    <p className={`text-sm ${resolvedMode === 'dark' ? 'text-slate-500' : 'text-slate-500'}`}>Web Application</p>
+                                    <p className={`text-sm ${resolvedMode === 'dark' ? 'text-slate-400' : 'text-slate-500'}`}>Web Application</p>
                                 </div>
                             </div>
 

@@ -18,7 +18,7 @@ const PortfolioContent = () => {
   const { theme, resolvedMode } = useTheme();
 
   return (
-    <div className={`min-h-screen font-sans transition-colors duration-500 ${resolvedMode === 'dark' ? 'text-slate-200' : 'text-slate-900'} selection:bg-${theme.tailwind}-500/30 selection:text-${theme.tailwind}-500`}>
+    <div className={`min-h-screen font-sans transition-colors duration-500 ${resolvedMode === 'dark' ? 'text-slate-200' : 'text-slate-900'} selection:bg-${theme.tailwind}-500/30`}>
       <ThemeSafelist />
       <ScrollProgress />
       <ParticleBackground effect={currentEffect} />

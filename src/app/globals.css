@@ -3,6 +3,10 @@
 :root {
   --background: #020617;
   --foreground: #f8fafc;
+  /* SSR/pre-hydration fallback — must match the default theme (presetColors[3], Orange) in ThemeContext.tsx */
+  --theme-primary: 24 95% 53%;
+  --theme-primary-text: 24 85% 30%;
+  --theme-on-primary: 222 47% 11%;
 }
 
 
@@ -23,13 +27,13 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #020617;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--theme-primary) / 0.3);
   border-radius: 5px;
-  border: 2px solid #020617;
+  border: 2px solid var(--background);
   /* Creates padding effect */
 }
 
