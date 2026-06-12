@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Train } from 'lucide-react';
+import { ExternalLink, Train, Trophy, Shapes } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { Gamepad2 } from 'lucide-react';
 
@@ -31,6 +31,22 @@ const projectsData: ProjectItem[] = [
         description: 'A game in which you control a neon ball and aim to eat as many green balls as possible while avoiding dangerous spikes.',
         icon: <Gamepad2 className="w-10 h-10" />,
         tags: ['Game', 'Frontend', 'Canvas', 'Physics']
+    },
+    {
+        id: 3,
+        title: 'World Cup 2026 App',
+        link: 'https://wm.davimeyer.dev',
+        description: 'A companion app for the 2026 World Cup that lets you follow live match scores and explore AI-powered analyses of games and teams.',
+        icon: <Trophy className="w-10 h-10" />,
+        tags: ['Live Data', 'AI', 'Frontend', 'API Integration']
+    },
+    {
+        id: 4,
+        title: 'Geometry Ultra',
+        link: 'https://geometry-ultra.davimeyer.dev',
+        description: 'A fast-paced game featuring global leaderboard systems and real-time online multiplayer.',
+        icon: <Shapes className="w-10 h-10" />,
+        tags: ['Game', 'Multiplayer', 'Leaderboards', 'Real-time']
     }
 ];
 
