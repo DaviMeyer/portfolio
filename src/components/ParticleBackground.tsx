@@ -234,11 +234,41 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
         };
 
         // ── Strange Attractor ────────────────────────────────────────────────
+        // Clifford attractor. Every preset below is numerically verified to stay a
+        // rich, space-filling attractor — incl. under the ±0.09 breathing wiggle on
+        // c/d (no fixed-point or periodic-window collapse). Transitions CROSSFADE
+        // between two complete attractors instead of lerping a/b: linear parameter
+        // paths inevitably pass through degenerate regimes (the old version
+        // shrank to a dot because of this — 3 of its presets even WERE fixed points).
+        const CLIFFORD_PRESETS = [
+            [1.7, 1.7, 0.6, 1.2],
+            [-2.0, -2.0, -1.2, 2.0],
+            [2.0, -2.0, -0.5, -0.9],
+            [-1.4, 1.6, 1.0, 0.7],
+            [-2.0, 2.0, 0.8, -1.4],
+            [1.9, -1.9, -0.5, -0.9],
+        ];
+        const seedAttractor = (idx: number) => {
+            const [a, b, c, d] = CLIFFORD_PRESETS[idx];
+            // Warm up the orbit and measure its real extent so the very first frame
+            // is already scaled to fill the screen (no initial pop/zoom).
+            let x = 0.1, y = 0, minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
+            for (let i = 0; i < 1500; i++) {
+                const nx = Math.sin(a * y) + c * Math.cos(a * x);
+                const ny = Math.sin(b * x) + d * Math.cos(b * y);
+                x = nx; y = ny;
+                if (i < 100) continue;
+                if (x < minX) minX = x; if (x > maxX) maxX = x;
+                if (y < minY) minY = y; if (y > maxY) maxY = y;
+            }
+            return { a, b, c, d, x, y, minX, maxX, minY, maxY };
+        };
         const initStrangeAttractor = () => {
             particles = [{
-                x: 0.1, y: 0, frame: 0,
-                a: 1.7, b: 1.7, c: 0.6, d: 1.2,
-                tA: 1.7, tB: 1.7, tC: 0.6, tD: 1.2,
+                frame: 0, idx: 0,
+                hold: 660, fadeLen: 420,    // ~11s stable, ~7s crossfade (60fps)
+                wait: 660, fade: -1,        // fade < 0 → holding
+                cur: seedAttractor(0), nxt: null, nextIdx: 0,
             }];
         };
 
@@ -664,34 +694,63 @@ const ParticleBackground = ({ effect }: ParticleBackgroundProps) => {
             const s = particles[0]; const t = target();
             ctx.fillStyle=resolvedMode==='dark'?'rgba(2,6,23,0.014)':'rgba(245,247,252,0.014)';
             ctx.fillRect(0,0,width,height);
+            s.frame++;
 
-            // Slowly morph parameters toward targets
-            s.a+=(s.tA-s.a)*0.0012; s.b+=(s.tB-s.b)*0.0012;
-            s.c+=(s.tC-s.c)*0.0012; s.d+=(s.tD-s.d)*0.0012;
-
-            if(++s.frame%500===0){
-                const presets=[
-                    [1.7,1.7,0.6,1.2],[-1.4,1.6,1.0,0.7],[2.0,-2.0,-0.5,-0.9],
-                    [1.5,-1.8,1.6,0.9],[-1.8,-2.0,-0.5,-0.9],[1.1,-1.0,0.4,-1.2],
-                    [-2.0,2.0,0.8,-1.4],[1.9,-1.9,-0.5,-0.9],[2.5,-1.2,-0.9,0.6],
-                ];
-                const [a,b,c,d]=presets[Math.floor(Math.random()*presets.length)];
-                s.tA=a; s.tB=b; s.tC=c; s.tD=d;
+            // State machine: hold the current attractor, then crossfade to the next —
+            // one constellation dissolves while the next materializes.
+            if (s.fade < 0 && --s.wait <= 0) {
+                let n; do { n = Math.floor(Math.random() * CLIFFORD_PRESETS.length); } while (n === s.idx);
+                s.nxt = seedAttractor(n); s.nextIdx = n; s.fade = 0;
+            }
+            let k = 0;
+            if (s.fade >= 0) {
+                k = s.fade / s.fadeLen;
+                k = k * k * (3 - 2 * k); // smoothstep
+                if (++s.fade > s.fadeLen) { s.cur = s.nxt; s.idx = s.nextIdx; s.nxt = null; s.fade = -1; s.wait = s.hold; k = 1; }
             }
 
+            // View box: blend of the two attractors' (smoothed) extents during a fade,
+            // mapped anisotropically so the shape fills ~92% of the whole screen.
+            const bb = s.nxt ? {
+                minX: s.cur.minX + (s.nxt.minX - s.cur.minX) * k, maxX: s.cur.maxX + (s.nxt.maxX - s.cur.maxX) * k,
+                minY: s.cur.minY + (s.nxt.minY - s.cur.minY) * k, maxY: s.cur.maxY + (s.nxt.maxY - s.cur.maxY) * k,
+            } : s.cur;
+            const bbW = Math.max(0.6, bb.maxX - bb.minX), bbH = Math.max(0.6, bb.maxY - bb.minY);
+            const midX = (bb.minX + bb.maxX) / 2, midY = (bb.minY + bb.maxY) / 2;
+            const scaleX = width * 0.92 / bbW, scaleY = height * 0.90 / bbH;
             // Mouse gently shifts the projection center
-            const cx=width/2+(t.x-width/2)*0.06, cy=height/2+(t.y-height/2)*0.06;
-            const scale=Math.min(width,height)/4.4;
-            const alpha=resolvedMode==='dark'?0.55:0.45;
-            ctx.fillStyle=tc(alpha);
+            const cx = width/2 + (t.x - width/2) * 0.06, cy = height/2 + (t.y - height/2) * 0.06;
+
+            // Slow breathing on the amplitude params c/d (±0.09, verified safe) keeps
+            // the shape subtly alive between the big crossfade transformations.
+            const run = (o: { a:number; b:number; c:number; d:number; x:number; y:number; minX:number; maxX:number; minY:number; maxY:number }, count: number, ph: number) => {
+                if (count <= 0) return;
+                const a = o.a, b = o.b;
+                const c = o.c + 0.09 * Math.sin(s.frame * 0.011 + ph);
+                const d = o.d + 0.09 * Math.cos(s.frame * 0.0087 + ph);
+                let x = o.x, y = o.y, mnX = 1e9, mxX = -1e9, mnY = 1e9, mxY = -1e9;
+                for (let i = 0; i < count; i++) {
+                    const nx = Math.sin(a*y) + c*Math.cos(a*x);
+                    const ny = Math.sin(b*x) + d*Math.cos(b*y);
+                    x = nx; y = ny;
+                    if (x < mnX) mnX = x; if (x > mxX) mxX = x;
+                    if (y < mnY) mnY = y; if (y > mxY) mxY = y;
+                    const px = Math.floor(cx + (x - midX) * scaleX), py = Math.floor(cy + (y - midY) * scaleY);
+                    if (px >= 0 && px < width && py >= 0 && py < height) ctx.rect(px, py, 1, 1);
+                }
+                o.x = x; o.y = y;
+                // Smoothly track the real extent so the view gently breathes with the shape
+                if (count > 300) {
+                    o.minX += (mnX - o.minX) * 0.05; o.maxX += (mxX - o.maxX) * 0.05;
+                    o.minY += (mnY - o.minY) * 0.05; o.maxY += (mxY - o.maxY) * 0.05;
+                }
+            };
+
+            const N = 4200;
+            ctx.fillStyle = tc(resolvedMode === 'dark' ? 0.55 : 0.45);
             ctx.beginPath();
-            for(let i=0;i<3000;i++){
-                const nx=Math.sin(s.a*s.y)+s.c*Math.cos(s.a*s.x);
-                const ny=Math.sin(s.b*s.x)+s.d*Math.cos(s.b*s.y);
-                s.x=nx; s.y=ny;
-                const px=Math.floor(cx+s.x*scale), py=Math.floor(cy+s.y*scale);
-                if(px>=0&&px<width&&py>=0&&py<height) ctx.rect(px,py,1,1);
-            }
+            run(s.cur, Math.round(N * (1 - k)), 0);
+            if (s.nxt) run(s.nxt, Math.round(N * k), 2.1);
             ctx.fill();
         };
 
