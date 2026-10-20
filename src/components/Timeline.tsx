@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Server, Code2, Terminal, Layers } from 'lucide-react';
+import { Server, Code2, Terminal, Layers, Cloud } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 
 interface TimelineItem {
@@ -17,13 +17,22 @@ interface TimelineItem {
 
 const timelineData: TimelineItem[] = [
     {
+        id: 6,
+        year: '2026 - Present',
+        title: 'Software Engineer (API Platforms)',
+        place: 'SIX Group',
+        description: 'Working as a qualified IT specialist on API platforms. Building robust backend services and intuitive frontend applications, and working with AI agents and cloud infrastructure on Azure.',
+        icon: <Cloud className="w-6 h-6" />,
+        tags: ['API Platforms', 'Springboot', 'Java', 'React', 'Angular', 'AI Agents', 'Azure']
+    },
+    {
         id: 1,
-        year: '2025 - Present',
+        year: '2025 - 2026',
         title: 'Full Stack Developer',
         place: 'SIX Group',
         description: 'Working in a specialized department developing end-to-end solutions. Designing robust backend architectures and crafting intuitive frontend experiences.',
         icon: <Server className="w-6 h-6" />,
-        tags: ['React', 'Node.js', 'TypeScript', 'SQL', 'Angular']
+        tags: ['React', 'Node.js', 'TypeScript', 'SQL', 'Angular', 'Springboot', 'Java']
     },
     {
         id: 5,
@@ -95,7 +104,7 @@ const Timeline = () => {
                     <div className={`w-20 h-1 bg-gradient-to-r from-${theme.tailwind}-500 to-${theme.secondary}-500 mx-auto rounded-full mb-8`} />
 
                     <p className={`max-w-2xl mx-auto leading-relaxed ${resolvedMode === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>
-                        I am Davi Meyer, currently in my 4th and final year of apprenticeship at Six Group AG, and I expect to complete my apprenticeship in Summer 2026.
+                        I am Davi Meyer, a qualified IT specialist at SIX Group. I completed my apprenticeship in 2026 with an overall grade of 5.3 and a 5.7 on my final project (IPA).
                     </p>
                 </div>
             </motion.div>
