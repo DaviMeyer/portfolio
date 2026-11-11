@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://davimeyer.dev"),
   title: "Davi Meyer | Software Engineer",
   description:
-    "Davi Meyer – Full Stack Developer & Software Engineer at SIX Group. Portfolio with projects, experience and contact.",
+    "I am Davi Meyer, a software engineer at SIX Group building backend services and modern web applications. Portfolio with projects, experience and contact.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

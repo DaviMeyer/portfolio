@@ -104,7 +104,7 @@ const Timeline = () => {
                     <div className={`w-20 h-1 bg-gradient-to-r from-${theme.tailwind}-500 to-${theme.secondary}-500 mx-auto rounded-full mb-8`} />
 
                     <p className={`max-w-2xl mx-auto leading-relaxed ${resolvedMode === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>
-                        I am Davi Meyer, a qualified IT specialist at SIX Group. I completed my apprenticeship in 2026 with an overall grade of 5.3 and a 5.7 on my final project (IPA).
+                        I am Davi Meyer, a software engineer at SIX Group building backend services and modern web applications. I completed my apprenticeship in 2026 with an overall grade of 5.3 and a 5.7 on my final project (IPA).
                     </p>
                 </div>
             </motion.div>
